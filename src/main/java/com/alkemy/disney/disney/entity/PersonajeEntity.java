@@ -26,15 +26,13 @@ public class PersonajeEntity {
 
   private String historia;
 
-  @ManyToMany(
-      cascade = {
-          CascadeType.PERSIST,
-          CascadeType.MERGE
-      })
-  @JoinTable(
-      name = "personaje_peliculas",
-      joinColumns = @JoinColumn(name = "personaje_id"),
-      inverseJoinColumns = @JoinColumn(name = "pelicula_id")
-  )
+  @ManyToMany(mappedBy = "personajes", cascade = CascadeType.ALL)
   private Set<PeliculaEntity> peliculas = new HashSet<>();
+
+  public void agregarPelicula(PeliculaEntity pelicula) {
+    this.peliculas.add(pelicula);
+  }
+  public void eliminarPelicula(PeliculaEntity pelicula) {
+    this.peliculas.remove(pelicula);
+  }
 }

@@ -27,6 +27,15 @@ public class PeliculaEntity {
 
   private Integer calificacion;
 
-  @ManyToMany(mappedBy = "peliculas", cascade = CascadeType.ALL)
+  @ManyToMany(
+      cascade = {
+          CascadeType.PERSIST,
+          CascadeType.MERGE
+      })
+  @JoinTable(
+      name = "pelicula_personaje",
+      joinColumns = @JoinColumn(name = "pelicula_id"),
+      inverseJoinColumns = @JoinColumn(name = "personaje_id")
+  )
   private Set<PersonajeEntity> personajes = new HashSet<>();
 }
