@@ -32,6 +32,7 @@ public class PersonajeEntity {
   public void agregarPelicula(PeliculaEntity pelicula) {
     this.peliculas.add(pelicula);
   }
+
   public void eliminarPelicula(PeliculaEntity pelicula) {
     this.peliculas.remove(pelicula);
   }
