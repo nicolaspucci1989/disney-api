@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonajeServiceImpl implements PersonajeService {
@@ -33,5 +34,14 @@ public class PersonajeServiceImpl implements PersonajeService {
   public List<PersonajeBasicDTO> getAll() {
     List<PersonajeEntity> entities = this.personajeRepository.findAll();
     return personajeMapper.personajeEntityList2BasicDTOList(entities);
+  }
+
+  @Override
+  public PersonajeDTO getDetailsById(Long id) {
+    Optional<PersonajeEntity> entity = this.personajeRepository.findById(id);
+    if (entity.isEmpty()) {
+      return null;
+    }
+    return this.personajeMapper.personajeEntity2DTO(entity.get(), true);
   }
 }

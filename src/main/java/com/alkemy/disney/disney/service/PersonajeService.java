@@ -9,4 +9,6 @@ public interface PersonajeService {
   PersonajeDTO save(PersonajeDTO dto);
 
   List<PersonajeBasicDTO> getAll();
+
+  PersonajeDTO getDetailsById(Long id);
 }

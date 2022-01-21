@@ -27,6 +27,12 @@ public class PersonajeController {
     return ResponseEntity.ok(personajes);
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<PersonajeDTO> getDetailsById(@PathVariable Long id) {
+    PersonajeDTO personaje = personajeService.getDetailsById(id);
+    return ResponseEntity.ok(personaje);
+  }
+
   @PostMapping
   public ResponseEntity<PersonajeDTO> save(@RequestBody PersonajeDTO personaje) {
     PersonajeDTO personajeGuardado = personajeService.save(personaje);
