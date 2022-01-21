@@ -21,8 +21,6 @@ public class GeneroController {
     this.generoService = generoService;
   }
 
-
-
   @PostMapping
   public ResponseEntity<GeneroDTO> save(@RequestBody GeneroDTO genero) {
     GeneroDTO generoGuardado = generoService.save(genero);
