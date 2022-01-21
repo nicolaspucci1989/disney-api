@@ -1,14 +1,14 @@
 package com.alkemy.disney.disney.controller;
 
+import com.alkemy.disney.disney.dto.PeliculaBasicDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
 import com.alkemy.disney.disney.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("movies")
@@ -19,6 +19,12 @@ public class PeliculaController {
   @Autowired
   public PeliculaController(PeliculaService peliculaService) {
     this.peliculaService = peliculaService;
+  }
+
+  @GetMapping
+  public ResponseEntity<List<PeliculaBasicDTO>> getAll() {
+    List<PeliculaBasicDTO> dtos = peliculaService.getAll();
+    return ResponseEntity.ok(dtos);
   }
 
   @PostMapping
