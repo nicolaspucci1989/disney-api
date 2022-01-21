@@ -1,6 +1,7 @@
 package com.alkemy.disney.disney.mapper;
 
 import com.alkemy.disney.disney.dto.PeliculaDTO;
+import com.alkemy.disney.disney.dto.PersonajeBasicDTO;
 import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.entity.PersonajeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,18 @@ public class PersonajeMapper {
   public List<PersonajeDTO> personajeEntitySet2DTOList(Collection<PersonajeEntity> entities, boolean loadPeliculas) {
     List<PersonajeDTO> dtos = new ArrayList<>();
     entities.forEach(entity -> dtos.add(this.personajeEntity2DTO(entity, loadPeliculas)));
+    return dtos;
+  }
+
+  public List<PersonajeBasicDTO> personajeEntityList2BasicDTOList(Collection<PersonajeEntity> entities) {
+    List<PersonajeBasicDTO> dtos = new ArrayList<>();
+    PersonajeBasicDTO basicDTO;
+    for (PersonajeEntity entity : entities) {
+      basicDTO = new PersonajeBasicDTO();
+      basicDTO.setImagen(entity.getImagen());
+      basicDTO.setNombre(entity.getNombre());
+      dtos.add(basicDTO);
+    }
     return dtos;
   }
 }
