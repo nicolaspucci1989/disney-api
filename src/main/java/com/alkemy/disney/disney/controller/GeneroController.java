@@ -13,8 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("genre")
 public class GeneroController {
-  @Autowired
+
   private GeneroService generoService;
+
+  @Autowired
+  public GeneroController(GeneroService generoService) {
+    this.generoService = generoService;
+  }
+
+
 
   @PostMapping
   public ResponseEntity<GeneroDTO> save(@RequestBody GeneroDTO genero) {
