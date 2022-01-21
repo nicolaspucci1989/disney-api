@@ -11,11 +11,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class GeneroServiceImpl implements GeneroService {
 
-  @Autowired
   private GeneroMapper generoMapper;
+  private GeneroRepository generoRepository;
 
   @Autowired
-  private GeneroRepository generoRepository;
+  public GeneroServiceImpl(GeneroMapper generoMapper, GeneroRepository generoRepository) {
+    this.generoMapper = generoMapper;
+    this.generoRepository = generoRepository;
+  }
 
   public GeneroDTO save(GeneroDTO dto) {
     GeneroEntity generoEntity = generoMapper.generoDTO2Entity(dto);
