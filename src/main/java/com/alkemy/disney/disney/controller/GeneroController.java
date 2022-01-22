@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("genre")
 public class GeneroController {
 
-  private GeneroService generoService;
+  private final GeneroService generoService;
 
   @Autowired
   public GeneroController(GeneroService generoService) {

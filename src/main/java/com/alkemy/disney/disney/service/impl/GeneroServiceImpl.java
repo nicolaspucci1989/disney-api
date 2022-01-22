@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class GeneroServiceImpl implements GeneroService {
 
-  private GeneroMapper generoMapper;
-  private GeneroRepository generoRepository;
+  private final GeneroMapper generoMapper;
+  private final GeneroRepository generoRepository;
 
   @Autowired
   public GeneroServiceImpl(GeneroMapper generoMapper, GeneroRepository generoRepository) {

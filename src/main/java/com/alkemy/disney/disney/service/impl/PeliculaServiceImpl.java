@@ -7,7 +7,6 @@ import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.PeliculaMapper;
 import com.alkemy.disney.disney.repository.PeliculaRepository;
 import com.alkemy.disney.disney.service.PeliculaService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +15,8 @@ import java.util.List;
 @Service
 public class PeliculaServiceImpl implements PeliculaService {
 
-  private PeliculaRepository peliculaRepository;
-  private PeliculaMapper peliculaMapper;
+  private final PeliculaRepository peliculaRepository;
+  private final PeliculaMapper peliculaMapper;
 
   @Autowired
   public PeliculaServiceImpl(PeliculaMapper peliculaMapper, PeliculaRepository peliculaRepository) {

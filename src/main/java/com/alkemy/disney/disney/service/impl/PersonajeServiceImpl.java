@@ -16,8 +16,8 @@ import java.util.Optional;
 @Service
 public class PersonajeServiceImpl implements PersonajeService {
 
-  private PersonajeRepository personajeRepository;
-  private PersonajeMapper personajeMapper;
+  private final PersonajeRepository personajeRepository;
+  private final PersonajeMapper personajeMapper;
 
   @Autowired
   public PersonajeServiceImpl(PersonajeRepository personajeRepository, PersonajeMapper personajeMapper) {

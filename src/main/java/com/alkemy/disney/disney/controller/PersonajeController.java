@@ -40,7 +40,7 @@ public class PersonajeController {
   }
 
   @PutMapping("{id}")
-  public ResponseEntity<PersonajeDTO> update(@PathVariable Long id,@RequestBody PersonajeDTO personaje) {
+  public ResponseEntity<PersonajeDTO> update(@PathVariable Long id, @RequestBody PersonajeDTO personaje) {
     PersonajeDTO res = this.personajeService.update(id, personaje);
     return ResponseEntity.ok().body(res);
   }
