@@ -40,7 +40,7 @@ public class PeliculaServiceImpl implements PeliculaService {
   public PeliculaDTO getDetailsById(Long id) {
     return this.peliculaRepository.findById(id)
         .map(e -> this.peliculaMapper.peliculaEntity2DTO(e, true))
-        .orElseThrow(() -> new ParamNotFound("Id de personaje no valido"));
+        .orElseThrow(() -> new ParamNotFound("Id de pelicula no valido"));
   }
 
   @Override
