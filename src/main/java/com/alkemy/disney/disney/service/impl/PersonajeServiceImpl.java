@@ -39,10 +39,9 @@ public class PersonajeServiceImpl implements PersonajeService {
 
   @Override
   public PersonajeDTO getDetailsById(Long id) {
-    // TODO: agregar excepcion posta
     return this.personajeRepository.findById(id)
         .map(e -> this.personajeMapper.personajeEntity2DTO(e, true))
-        .orElseThrow(() -> new RuntimeException("no se encontro"));
+        .orElseThrow(() -> new ParamNotFound("no se encontro"));
   }
 
   @Override
