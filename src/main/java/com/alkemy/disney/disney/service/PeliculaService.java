@@ -9,4 +9,6 @@ public interface PeliculaService {
   PeliculaDTO save(PeliculaDTO dto);
 
   List<PeliculaBasicDTO> getAll();
+
+  PeliculaDTO getDetailsById(Long id);
 }

@@ -3,6 +3,7 @@ package com.alkemy.disney.disney.service.impl;
 import com.alkemy.disney.disney.dto.PeliculaBasicDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
 import com.alkemy.disney.disney.entity.PeliculaEntity;
+import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.PeliculaMapper;
 import com.alkemy.disney.disney.repository.PeliculaRepository;
 import com.alkemy.disney.disney.service.PeliculaService;
@@ -34,5 +35,12 @@ public class PeliculaServiceImpl implements PeliculaService {
   public List<PeliculaBasicDTO> getAll() {
     List<PeliculaEntity> all = peliculaRepository.findAll();
     return peliculaMapper.pelicualEntityList2BasicDTOList(all);
+  }
+
+  @Override
+  public PeliculaDTO getDetailsById(Long id) {
+    return this.peliculaRepository.findById(id)
+        .map(e -> this.peliculaMapper.peliculaEntity2DTO(e, true))
+        .orElseThrow(() -> new ParamNotFound("No se encotro el personaje"));
   }
 }

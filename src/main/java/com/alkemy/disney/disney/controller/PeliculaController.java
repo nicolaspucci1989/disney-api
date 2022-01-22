@@ -27,6 +27,12 @@ public class PeliculaController {
     return ResponseEntity.ok(dtos);
   }
 
+  @GetMapping("{id}")
+  public ResponseEntity<PeliculaDTO> getDetailsById(@PathVariable Long id) {
+    PeliculaDTO dto = peliculaService.getDetailsById(id);
+    return ResponseEntity.ok(dto);
+  }
+
   @PostMapping
   public ResponseEntity<PeliculaDTO> save(@RequestBody PeliculaDTO pelicula) {
     PeliculaDTO peliculaGuardada = peliculaService.save(pelicula);
