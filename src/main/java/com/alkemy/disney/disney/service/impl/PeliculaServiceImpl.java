@@ -41,6 +41,6 @@ public class PeliculaServiceImpl implements PeliculaService {
   public PeliculaDTO getDetailsById(Long id) {
     return this.peliculaRepository.findById(id)
         .map(e -> this.peliculaMapper.peliculaEntity2DTO(e, true))
-        .orElseThrow(() -> new ParamNotFound("No se encotro el personaje"));
+        .orElseThrow(() -> new ParamNotFound("Id de personaje no valido"));
   }
 }
