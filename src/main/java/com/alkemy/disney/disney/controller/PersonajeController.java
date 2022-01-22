@@ -38,4 +38,10 @@ public class PersonajeController {
     PersonajeDTO personajeGuardado = personajeService.save(personaje);
     return ResponseEntity.status(HttpStatus.CREATED).body(personajeGuardado);
   }
+
+  @PutMapping("{id}")
+  public ResponseEntity<PersonajeDTO> update(@PathVariable Long id,@RequestBody PersonajeDTO personaje) {
+    PersonajeDTO res = this.personajeService.update(id, personaje);
+    return ResponseEntity.ok().body(res);
+  }
 }

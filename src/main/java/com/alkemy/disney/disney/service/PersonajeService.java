@@ -11,4 +11,6 @@ public interface PersonajeService {
   List<PersonajeBasicDTO> getAll();
 
   PersonajeDTO getDetailsById(Long id);
+
+  PersonajeDTO update(Long id, PersonajeDTO personaje);
 }
