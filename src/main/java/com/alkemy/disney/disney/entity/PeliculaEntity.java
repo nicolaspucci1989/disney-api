@@ -43,7 +43,8 @@ public class PeliculaEntity {
   )
   private Set<PersonajeEntity> personajes = new HashSet<>();
 
-  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  // TODO: ver cascade
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "genero_id", insertable = false, updatable = false)
   private GeneroEntity genero;
 
