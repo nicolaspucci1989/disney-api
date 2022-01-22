@@ -44,4 +44,10 @@ public class PersonajeController {
     PersonajeDTO res = this.personajeService.update(id, personaje);
     return ResponseEntity.ok().body(res);
   }
+
+  @DeleteMapping("{id}")
+  public ResponseEntity<Void> delete(@PathVariable Long id) {
+    this.personajeService.delete(id);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+  }
 }

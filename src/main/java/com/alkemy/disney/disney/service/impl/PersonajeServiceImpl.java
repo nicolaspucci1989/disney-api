@@ -54,4 +54,9 @@ public class PersonajeServiceImpl implements PersonajeService {
     PersonajeEntity personajeSaved = this.personajeRepository.save(entity.get());
     return personajeMapper.personajeEntity2DTO(personajeSaved, false);
   }
+
+  @Override
+  public void delete(Long id) {
+    this.personajeRepository.deleteById(id);
+  }
 }
