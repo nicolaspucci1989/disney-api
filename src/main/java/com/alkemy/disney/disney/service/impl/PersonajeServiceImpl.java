@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PersonajeServiceImpl implements PersonajeService {
@@ -38,10 +37,9 @@ public class PersonajeServiceImpl implements PersonajeService {
 
   @Override
   public PersonajeDTO getDetailsById(Long id) {
-    Optional<PersonajeEntity> entity = this.personajeRepository.findById(id);
-    if (entity.isEmpty()) {
-      return null;
-    }
-    return this.personajeMapper.personajeEntity2DTO(entity.get(), true);
+    // TODO: agregar excepcion posta
+    return this.personajeRepository.findById(id)
+        .map(e -> this.personajeMapper.personajeEntity2DTO(e, true))
+        .orElseThrow(() -> new RuntimeException("no se encontro"));
   }
 }
