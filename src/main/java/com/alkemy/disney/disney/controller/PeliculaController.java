@@ -38,4 +38,10 @@ public class PeliculaController {
     PeliculaDTO peliculaGuardada = peliculaService.save(pelicula);
     return ResponseEntity.status(HttpStatus.CREATED).body(peliculaGuardada);
   }
+
+  @DeleteMapping("{id}")
+  public ResponseEntity<Void> delete(@PathVariable Long id) {
+    this.peliculaService.delete(id);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+  }
 }

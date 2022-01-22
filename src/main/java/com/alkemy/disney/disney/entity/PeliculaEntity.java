@@ -3,6 +3,8 @@ package com.alkemy.disney.disney.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +15,8 @@ import java.util.Set;
 @Table(name = "pelicula")
 @Getter
 @Setter
+@SQLDelete(sql = "UPDATE pelicula SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class PeliculaEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -45,4 +49,6 @@ public class PeliculaEntity {
 
   @Column(name = "genero_id", nullable = false)
   private Long generoId;
+
+  private boolean deleted = Boolean.FALSE;
 }

@@ -11,4 +11,6 @@ public interface PeliculaService {
   List<PeliculaBasicDTO> getAll();
 
   PeliculaDTO getDetailsById(Long id);
+
+  void delete(Long id);
 }

@@ -42,4 +42,9 @@ public class PeliculaServiceImpl implements PeliculaService {
         .map(e -> this.peliculaMapper.peliculaEntity2DTO(e, true))
         .orElseThrow(() -> new ParamNotFound("Id de personaje no valido"));
   }
+
+  @Override
+  public void delete(Long id) {
+    this.peliculaRepository.deleteById(id);
+  }
 }
