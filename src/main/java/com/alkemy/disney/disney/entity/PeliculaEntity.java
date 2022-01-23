@@ -43,12 +43,17 @@ public class PeliculaEntity {
   private Set<PersonajeEntity> personajes = new HashSet<>();
 
   // TODO: ver cascade
-  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "genero_id", insertable = false, updatable = false)
   private GeneroEntity genero;
 
+  // TODO: ver nullable
   @Column(name = "genero_id", nullable = false)
   private Long generoId;
 
   private boolean deleted = Boolean.FALSE;
+
+  public void addPersonaje(PersonajeEntity personaje) {
+    personajes.add(personaje);
+  }
 }

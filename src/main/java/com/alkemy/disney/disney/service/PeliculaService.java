@@ -15,5 +15,5 @@ public interface PeliculaService {
 
   void delete(Long id);
 
-  PeliculaEntity getEntityById(Long id);
+  void addPersonaje(Long id, Long idPersonaje);
 }

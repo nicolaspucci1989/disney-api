@@ -44,4 +44,11 @@ public class PeliculaController {
     this.peliculaService.delete(id);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
+
+  @PostMapping("{id}/character/{idPersonaje}")
+  public ResponseEntity<Void> addPersonaje(@PathVariable Long id, @PathVariable Long idPersonaje) {
+    this.peliculaService.addPersonaje(id, idPersonaje);
+    return ResponseEntity.status(HttpStatus.CREATED).build();
+  }
+
 }

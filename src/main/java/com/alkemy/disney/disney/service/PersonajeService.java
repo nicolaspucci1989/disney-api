@@ -2,6 +2,7 @@ package com.alkemy.disney.disney.service;
 
 import com.alkemy.disney.disney.dto.PersonajeBasicDTO;
 import com.alkemy.disney.disney.dto.PersonajeDTO;
+import com.alkemy.disney.disney.entity.PersonajeEntity;
 
 import java.util.List;
 
@@ -16,5 +17,5 @@ public interface PersonajeService {
 
   void delete(Long id);
 
-  void addPelicula(Long id, Long idPelicula);
+  PersonajeEntity getById(Long idPersonaje);
 }

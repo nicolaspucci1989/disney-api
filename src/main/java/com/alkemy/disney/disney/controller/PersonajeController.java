@@ -50,10 +50,4 @@ public class PersonajeController {
     this.personajeService.delete(id);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
-
- @PostMapping("{id}/movie/{idPelicula}")
-  public ResponseEntity<Void> addPelicula(@PathVariable Long id, @PathVariable Long idPelicula) {
-  this.personajeService.addPelicula(id, idPelicula);
-  return ResponseEntity.status(HttpStatus.CREATED).build();
- }
 }

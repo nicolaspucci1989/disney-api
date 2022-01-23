@@ -3,10 +3,12 @@ package com.alkemy.disney.disney.service.impl;
 import com.alkemy.disney.disney.dto.PeliculaBasicDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
 import com.alkemy.disney.disney.entity.PeliculaEntity;
+import com.alkemy.disney.disney.entity.PersonajeEntity;
 import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.PeliculaMapper;
 import com.alkemy.disney.disney.repository.PeliculaRepository;
 import com.alkemy.disney.disney.service.PeliculaService;
+import com.alkemy.disney.disney.service.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +18,14 @@ import java.util.List;
 public class PeliculaServiceImpl implements PeliculaService {
 
   private final PeliculaRepository peliculaRepository;
+  private final PersonajeService personajeService;
   private final PeliculaMapper peliculaMapper;
 
   @Autowired
-  public PeliculaServiceImpl(PeliculaMapper peliculaMapper, PeliculaRepository peliculaRepository) {
+  public PeliculaServiceImpl(PeliculaMapper peliculaMapper, PeliculaRepository peliculaRepository, PersonajeService personajeService) {
     this.peliculaMapper = peliculaMapper;
     this.peliculaRepository = peliculaRepository;
+    this.personajeService = personajeService;
   }
 
   public PeliculaDTO save(PeliculaDTO dto) {
@@ -49,7 +53,10 @@ public class PeliculaServiceImpl implements PeliculaService {
   }
 
   @Override
-  public PeliculaEntity getEntityById(Long id) {
-    return this.peliculaRepository.getById(id);
+  public void addPersonaje(Long id, Long idPersonaje) {
+    PeliculaEntity entity = peliculaRepository.getById(id);
+    PersonajeEntity personajeEntity = personajeService.getById(idPersonaje);
+    entity.addPersonaje(personajeEntity);
+    peliculaRepository.save(entity);
   }
 }

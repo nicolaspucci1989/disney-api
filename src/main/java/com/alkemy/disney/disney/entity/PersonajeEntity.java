@@ -35,11 +35,4 @@ public class PersonajeEntity {
 
   private boolean deleted = Boolean.FALSE;
 
-  public void agregarPelicula(PeliculaEntity pelicula) {
-    this.peliculas.add(pelicula);
-  }
-
-  public void eliminarPelicula(PeliculaEntity pelicula) {
-    this.peliculas.remove(pelicula);
-  }
 }
