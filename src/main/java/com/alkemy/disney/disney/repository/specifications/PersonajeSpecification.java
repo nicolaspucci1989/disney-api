@@ -33,6 +33,8 @@ public class PersonajeSpecification {
         );
       }
 
+      criteriaQuery.distinct(true);
+
       return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     };
   }
