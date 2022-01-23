@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -34,7 +35,7 @@ public class PeliculaController {
   }
 
   @PostMapping
-  public ResponseEntity<PeliculaDTO> save(@RequestBody PeliculaDTO pelicula) {
+  public ResponseEntity<PeliculaDTO> save(@Valid @RequestBody PeliculaDTO pelicula) {
     PeliculaDTO peliculaGuardada = peliculaService.save(pelicula);
     return ResponseEntity.status(HttpStatus.CREATED).body(peliculaGuardada);
   }
