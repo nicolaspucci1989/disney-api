@@ -35,8 +35,8 @@ public class PersonajeServiceImpl implements PersonajeService {
   }
 
   @Override
-  public List<PersonajeBasicDTO> getAll(String name, Integer age) {
-    PersonajeFilterDTO personajeFilterDTO = new PersonajeFilterDTO(name, age);
+  public List<PersonajeBasicDTO> getAll(String name, Integer age, List<Long> idMovies) {
+    PersonajeFilterDTO personajeFilterDTO = new PersonajeFilterDTO(name, age, idMovies);
     Specification<PersonajeEntity> spec = PersonajeSpecification.getByFilters(personajeFilterDTO);
     List<PersonajeEntity> entities = this.personajeRepository.findAll(spec);
     return personajeMapper.personajeEntityList2BasicDTOList(entities);
