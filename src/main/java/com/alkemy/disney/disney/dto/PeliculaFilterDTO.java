@@ -9,4 +9,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PeliculaFilterDTO {
   private String name;
+  private Long idGenre;
 }

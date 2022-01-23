@@ -8,7 +8,7 @@ import java.util.List;
 public interface PeliculaService {
   PeliculaDTO save(PeliculaDTO dto);
 
-  List<PeliculaBasicDTO> getAll(String name);
+  List<PeliculaBasicDTO> getAll(String name, Long idGenre);
 
   PeliculaDTO getDetailsById(Long id);
 

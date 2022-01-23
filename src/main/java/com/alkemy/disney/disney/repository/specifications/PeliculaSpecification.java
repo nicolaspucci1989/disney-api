@@ -25,6 +25,12 @@ public class PeliculaSpecification {
         );
       }
 
+      if (filterDTO.getIdGenre() != null) {
+        predicates.add(
+            criteriaBuilder.equal(root.<Long>get("genero"), filterDTO.getIdGenre())
+        );
+      }
+
       criteriaQuery.distinct(true);
 
       return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
