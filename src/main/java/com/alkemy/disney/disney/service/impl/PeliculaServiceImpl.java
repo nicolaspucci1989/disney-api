@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PeliculaServiceImpl implements PeliculaService {
@@ -66,5 +67,16 @@ public class PeliculaServiceImpl implements PeliculaService {
     PersonajeEntity personajeEntity = personajeService.getById(idPersonaje);
     entity.removePersonaje(personajeEntity);
     peliculaRepository.save(entity);
+  }
+
+  @Override
+  public PeliculaDTO update(Long id, PeliculaDTO peliculaDTO) {
+    Optional<PeliculaEntity> entity = peliculaRepository.findById(id);
+    if (entity.isEmpty()) {
+      throw new ParamNotFound("Id de presonaje no valido");
+    }
+    this.peliculaMapper.peliculaEntityRefreshValues(entity.get(), peliculaDTO);
+    PeliculaEntity peliculaSaved = this.peliculaRepository.save(entity.get());
+    return peliculaMapper.peliculaEntity2DTO(peliculaSaved, false);
   }
 }

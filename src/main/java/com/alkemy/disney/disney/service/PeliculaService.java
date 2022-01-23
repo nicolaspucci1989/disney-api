@@ -18,4 +18,6 @@ public interface PeliculaService {
   void addPersonaje(Long id, Long idPersonaje);
 
   void removePersonaje(Long id, Long idPersonaje);
+
+  PeliculaDTO update(Long id, PeliculaDTO pelicula);
 }

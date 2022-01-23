@@ -2,6 +2,7 @@ package com.alkemy.disney.disney.controller;
 
 import com.alkemy.disney.disney.dto.PeliculaBasicDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
+import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,12 @@ public class PeliculaController {
   public ResponseEntity<PeliculaDTO> save(@Valid @RequestBody PeliculaDTO pelicula) {
     PeliculaDTO peliculaGuardada = peliculaService.save(pelicula);
     return ResponseEntity.status(HttpStatus.CREATED).body(peliculaGuardada);
+  }
+
+  @PutMapping("{id}")
+  public ResponseEntity<PeliculaDTO> update(@PathVariable Long id, @RequestBody PeliculaDTO pelicula) {
+    PeliculaDTO res = this.peliculaService.update(id, pelicula);
+    return ResponseEntity.ok().body(res);
   }
 
   @DeleteMapping("{id}")

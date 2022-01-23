@@ -65,4 +65,12 @@ public class PeliculaMapper {
     }
     return dtos;
   }
+
+  public void peliculaEntityRefreshValues(PeliculaEntity entity, PeliculaDTO peliculaDTO) {
+    entity.setImagen(peliculaDTO.getImagen());
+    entity.setTitulo(peliculaDTO.getTitulo());
+    entity.setFechaDeCreacion(peliculaDTO.getFechaDeCreacion());
+    entity.setCalificacion(peliculaDTO.getCalificacion());
+    entity.setGeneroId(entity.getGeneroId());
+  }
 }
