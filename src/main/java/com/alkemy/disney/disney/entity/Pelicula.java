@@ -38,7 +38,7 @@ public class Pelicula {
   )
   private Set<Personaje> personajes = new HashSet<>();
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne
   @JoinColumn(name = "genero_id", insertable = false, updatable = false)
   private Genero genero;
 
