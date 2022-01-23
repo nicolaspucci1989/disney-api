@@ -1,7 +1,6 @@
 package com.alkemy.disney.disney.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
