@@ -2,14 +2,17 @@ package com.alkemy.disney.disney.service.impl;
 
 import com.alkemy.disney.disney.dto.PeliculaBasicDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
+import com.alkemy.disney.disney.dto.PeliculaFilterDTO;
 import com.alkemy.disney.disney.entity.PeliculaEntity;
 import com.alkemy.disney.disney.entity.PersonajeEntity;
 import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.PeliculaMapper;
 import com.alkemy.disney.disney.repository.PeliculaRepository;
+import com.alkemy.disney.disney.repository.specifications.PeliculaSpecification;
 import com.alkemy.disney.disney.service.PeliculaService;
 import com.alkemy.disney.disney.service.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,8 +39,10 @@ public class PeliculaServiceImpl implements PeliculaService {
   }
 
   @Override
-  public List<PeliculaBasicDTO> getAll() {
-    List<PeliculaEntity> all = peliculaRepository.findAll();
+  public List<PeliculaBasicDTO> getAll(String name) {
+    PeliculaFilterDTO peliculaFilterDTO = new PeliculaFilterDTO(name);
+    Specification<PeliculaEntity> spec = PeliculaSpecification.getByFilters(peliculaFilterDTO);
+    List<PeliculaEntity> all = peliculaRepository.findAll(spec);
     return peliculaMapper.pelicualEntityList2BasicDTOList(all);
   }
 

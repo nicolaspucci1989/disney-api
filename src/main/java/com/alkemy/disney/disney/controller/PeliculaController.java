@@ -23,8 +23,10 @@ public class PeliculaController {
   }
 
   @GetMapping
-  public ResponseEntity<List<PeliculaBasicDTO>> getAll() {
-    List<PeliculaBasicDTO> dtos = peliculaService.getAll();
+  public ResponseEntity<List<PeliculaBasicDTO>> getAll(
+      @RequestParam(required = false) String name
+  ) {
+    List<PeliculaBasicDTO> dtos = peliculaService.getAll(name);
     return ResponseEntity.ok(dtos);
   }
 
