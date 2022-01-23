@@ -39,9 +39,6 @@ public class Pelicula {
   private Set<Personaje> personajes = new HashSet<>();
 
   @ManyToOne
-  @JoinColumn(name = "genero_id", insertable = false, updatable = false)
+  @JoinColumn(name = "genero_id")
   private Genero genero;
-
-  @Column(name = "genero_id", nullable = false)
-  private Long generoId;
 }
