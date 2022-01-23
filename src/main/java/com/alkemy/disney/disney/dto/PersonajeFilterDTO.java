@@ -8,4 +8,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PersonajeFilterDTO {
   private String name;
+  private Integer edad;
 }

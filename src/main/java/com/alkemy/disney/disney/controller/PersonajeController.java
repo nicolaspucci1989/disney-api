@@ -23,9 +23,10 @@ public class PersonajeController {
 
   @GetMapping
   public ResponseEntity<List<PersonajeBasicDTO>> getAll(
-      @RequestParam(required = false) String name
+      @RequestParam(required = false) String name,
+      @RequestParam(required = false) Integer age
   ) {
-    List<PersonajeBasicDTO> personajes = this.personajeService.getAll(name);
+    List<PersonajeBasicDTO> personajes = this.personajeService.getAll(name, age);
     return ResponseEntity.ok(personajes);
   }
 

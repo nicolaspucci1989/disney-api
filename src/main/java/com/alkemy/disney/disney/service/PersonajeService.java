@@ -9,7 +9,7 @@ import java.util.List;
 public interface PersonajeService {
   PersonajeDTO save(PersonajeDTO dto);
 
-  List<PersonajeBasicDTO> getAll(String name);
+  List<PersonajeBasicDTO> getAll(String name, Integer age);
 
   PersonajeDTO getDetailsById(Long id);
 

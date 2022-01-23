@@ -4,6 +4,7 @@ import com.alkemy.disney.disney.dto.PersonajeFilterDTO;
 import com.alkemy.disney.disney.entity.PersonajeEntity;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
+import org.springframework.util.NumberUtils;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Predicate;
@@ -23,6 +24,12 @@ public class PersonajeSpecification {
                 criteriaBuilder.lower(root.get("nombre")),
                 "%" + filterDTO.getName().toLowerCase() + "%"
             )
+        );
+      }
+
+      if (filterDTO.getEdad() != null) {
+        predicates.add(
+            criteriaBuilder.equal(root.<Integer>get("edad"), filterDTO.getEdad())
         );
       }
 
