@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name = "personaje")
 @Getter
 @Setter
-public class PersonajeEntity {
+public class Personaje {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
@@ -27,13 +27,13 @@ public class PersonajeEntity {
   private String historia;
 
   @ManyToMany(mappedBy = "personajes", cascade = CascadeType.ALL)
-  private Set<PeliculaEntity> peliculas = new HashSet<>();
+  private Set<Pelicula> peliculas = new HashSet<>();
 
-  public void agregarPelicula(PeliculaEntity pelicula) {
+  public void agregarPelicula(Pelicula pelicula) {
     this.peliculas.add(pelicula);
   }
 
-  public void eliminarPelicula(PeliculaEntity pelicula) {
+  public void eliminarPelicula(Pelicula pelicula) {
     this.peliculas.remove(pelicula);
   }
 }
