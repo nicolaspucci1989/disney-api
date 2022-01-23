@@ -3,7 +3,6 @@ package com.alkemy.disney.disney.controller;
 import com.alkemy.disney.disney.dto.PeliculaBasicDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
 import com.alkemy.disney.disney.service.PeliculaService;
-import jdk.jfr.Frequency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
