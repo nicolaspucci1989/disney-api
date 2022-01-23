@@ -2,7 +2,6 @@ package com.alkemy.disney.disney.controller;
 
 import com.alkemy.disney.disney.dto.PeliculaBasicDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
-import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -60,7 +59,7 @@ public class PeliculaController {
   }
 
   @DeleteMapping("{id}/character/{idPersonaje}")
-  public ResponseEntity<Void> removePersonaje(@PathVariable Long id, @PathVariable Long idPersonaje){
+  public ResponseEntity<Void> removePersonaje(@PathVariable Long id, @PathVariable Long idPersonaje) {
     this.peliculaService.removePersonaje(id, idPersonaje);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
