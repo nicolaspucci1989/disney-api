@@ -9,7 +9,7 @@ import java.util.List;
 public interface PersonajeService {
   PersonajeDTO save(PersonajeDTO dto);
 
-  List<PersonajeBasicDTO> getAll();
+  List<PersonajeBasicDTO> getAll(String name);
 
   PersonajeDTO getDetailsById(Long id);
 

@@ -22,8 +22,10 @@ public class PersonajeController {
   }
 
   @GetMapping
-  public ResponseEntity<List<PersonajeBasicDTO>> getAll() {
-    List<PersonajeBasicDTO> personajes = this.personajeService.getAll();
+  public ResponseEntity<List<PersonajeBasicDTO>> getAll(
+      @RequestParam(required = false) String name
+  ) {
+    List<PersonajeBasicDTO> personajes = this.personajeService.getAll(name);
     return ResponseEntity.ok(personajes);
   }
 
