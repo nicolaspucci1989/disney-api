@@ -39,8 +39,8 @@ public class PeliculaServiceImpl implements PeliculaService {
   }
 
   @Override
-  public List<PeliculaBasicDTO> getAll(String name, Long idGenre) {
-    PeliculaFilterDTO peliculaFilterDTO = new PeliculaFilterDTO(name, idGenre);
+  public List<PeliculaBasicDTO> getAll(String name, Long idGenre, String order) {
+    PeliculaFilterDTO peliculaFilterDTO = new PeliculaFilterDTO(name, idGenre, order);
     Specification<PeliculaEntity> spec = PeliculaSpecification.getByFilters(peliculaFilterDTO);
     List<PeliculaEntity> all = peliculaRepository.findAll(spec);
     return peliculaMapper.pelicualEntityList2BasicDTOList(all);

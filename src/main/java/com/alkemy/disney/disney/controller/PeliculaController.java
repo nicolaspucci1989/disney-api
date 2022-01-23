@@ -3,6 +3,7 @@ package com.alkemy.disney.disney.controller;
 import com.alkemy.disney.disney.dto.PeliculaBasicDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
 import com.alkemy.disney.disney.service.PeliculaService;
+import jdk.jfr.Frequency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,10 @@ public class PeliculaController {
   @GetMapping
   public ResponseEntity<List<PeliculaBasicDTO>> getAll(
       @RequestParam(required = false) String name,
-      @RequestParam(required = false) Long idGenre
+      @RequestParam(required = false) Long idGenre,
+      @RequestParam(defaultValue = "ASC") String order
   ) {
-    List<PeliculaBasicDTO> dtos = peliculaService.getAll(name, idGenre);
+    List<PeliculaBasicDTO> dtos = peliculaService.getAll(name, idGenre, order);
     return ResponseEntity.ok(dtos);
   }
 

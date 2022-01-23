@@ -33,6 +33,13 @@ public class PeliculaSpecification {
 
       criteriaQuery.distinct(true);
 
+      String orderByField = "fechaDeCreacion";
+      criteriaQuery.orderBy(
+          filterDTO.isAsc() ?
+              criteriaBuilder.asc(root.get(orderByField)) :
+              criteriaBuilder.desc(root.get(orderByField))
+      );
+
       return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     };
   }
