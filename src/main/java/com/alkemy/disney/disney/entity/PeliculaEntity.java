@@ -39,12 +39,11 @@ public class PeliculaEntity {
   @JoinTable(
       name = "pelicula_personaje",
       joinColumns = @JoinColumn(name = "pelicula_id"),
-      inverseJoinColumns = @JoinColumn(name = "personaje_id")
-  )
+      inverseJoinColumns = @JoinColumn(name = "personaje_id"))
   private Set<PersonajeEntity> personajes = new HashSet<>();
 
   // TODO: ver cascade
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "genero_id", insertable = false, updatable = false)
   private GeneroEntity genero;
 
