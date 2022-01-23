@@ -15,4 +15,6 @@ public interface PersonajeService {
   PersonajeDTO update(Long id, PersonajeDTO personaje);
 
   void delete(Long id);
+
+  void addPelicula(Long id, Long idPelicula);
 }

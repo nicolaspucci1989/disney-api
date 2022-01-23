@@ -47,4 +47,9 @@ public class PeliculaServiceImpl implements PeliculaService {
   public void delete(Long id) {
     this.peliculaRepository.deleteById(id);
   }
+
+  @Override
+  public PeliculaEntity getEntityById(Long id) {
+    return this.peliculaRepository.getById(id);
+  }
 }
