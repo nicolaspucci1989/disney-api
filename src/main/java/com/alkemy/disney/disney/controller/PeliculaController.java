@@ -51,4 +51,10 @@ public class PeliculaController {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
+  @DeleteMapping("{id}/character/{idPersonaje}")
+  public ResponseEntity<Void> removePersonaje(@PathVariable Long id, @PathVariable Long idPersonaje){
+    this.peliculaService.removePersonaje(id, idPersonaje);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+  }
+
 }

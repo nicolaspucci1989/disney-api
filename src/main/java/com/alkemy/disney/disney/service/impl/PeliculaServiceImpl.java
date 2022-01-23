@@ -59,4 +59,12 @@ public class PeliculaServiceImpl implements PeliculaService {
     entity.addPersonaje(personajeEntity);
     peliculaRepository.save(entity);
   }
+
+  @Override
+  public void removePersonaje(Long id, Long idPersonaje) {
+    PeliculaEntity entity = peliculaRepository.getById(id);
+    PersonajeEntity personajeEntity = personajeService.getById(idPersonaje);
+    entity.removePersonaje(personajeEntity);
+    peliculaRepository.save(entity);
+  }
 }

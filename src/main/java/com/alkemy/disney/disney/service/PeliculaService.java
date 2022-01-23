@@ -16,4 +16,6 @@ public interface PeliculaService {
   void delete(Long id);
 
   void addPersonaje(Long id, Long idPersonaje);
+
+  void removePersonaje(Long id, Long idPersonaje);
 }

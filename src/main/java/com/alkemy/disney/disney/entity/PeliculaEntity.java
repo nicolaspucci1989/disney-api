@@ -56,4 +56,8 @@ public class PeliculaEntity {
   public void addPersonaje(PersonajeEntity personaje) {
     personajes.add(personaje);
   }
+
+  public void removePersonaje(PersonajeEntity personaje) {
+    personajes.remove(personaje);
+  }
 }
