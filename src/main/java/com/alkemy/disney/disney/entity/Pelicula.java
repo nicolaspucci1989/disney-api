@@ -38,7 +38,7 @@ public class Pelicula {
   )
   private Set<Personaje> personajes = new HashSet<>();
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.MERGE)
   @JoinColumn(name = "genero_id")
   private Genero genero;
 }
