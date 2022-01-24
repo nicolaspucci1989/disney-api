@@ -10,14 +10,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "personaje")
 @Getter
 @Setter
 @SQLDelete(sql = "UPDATE personaje SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class PersonajeEntity {
+public class Personaje {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   private String imagen;
@@ -31,7 +30,7 @@ public class PersonajeEntity {
   private String historia;
 
   @ManyToMany(mappedBy = "personajes", cascade = CascadeType.ALL)
-  private Set<PeliculaEntity> peliculas = new HashSet<>();
+  private Set<Pelicula> peliculas = new HashSet<>();
 
   private boolean deleted = Boolean.FALSE;
 

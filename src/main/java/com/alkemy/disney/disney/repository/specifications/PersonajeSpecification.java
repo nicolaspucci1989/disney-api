@@ -1,8 +1,8 @@
 package com.alkemy.disney.disney.repository.specifications;
 
 import com.alkemy.disney.disney.dto.PersonajeFilterDTO;
-import com.alkemy.disney.disney.entity.PeliculaEntity;
-import com.alkemy.disney.disney.entity.PersonajeEntity;
+import com.alkemy.disney.disney.entity.Pelicula;
+import com.alkemy.disney.disney.entity.Personaje;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Component
 public class PersonajeSpecification {
-  public static Specification<PersonajeEntity> getByFilters(PersonajeFilterDTO filterDTO) {
+  public static Specification<Personaje> getByFilters(PersonajeFilterDTO filterDTO) {
 
     return (root, criteriaQuery, criteriaBuilder) -> {
       List<Predicate> predicates = new ArrayList<>();
@@ -38,7 +38,7 @@ public class PersonajeSpecification {
       }
 
       if (!CollectionUtils.isEmpty(filterDTO.getIdMovies())) {
-        Join<PeliculaEntity, PersonajeEntity> join = root.join("peliculas", JoinType.INNER);
+        Join<Pelicula, Personaje> join = root.join("peliculas", JoinType.INNER);
         Expression<String> moviesId = join.get("id");
         predicates.add(moviesId.in(filterDTO.getIdMovies()));
       }

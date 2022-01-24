@@ -3,8 +3,8 @@ package com.alkemy.disney.disney.service.impl;
 import com.alkemy.disney.disney.dto.PeliculaBasicDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
 import com.alkemy.disney.disney.dto.PeliculaFilterDTO;
-import com.alkemy.disney.disney.entity.PeliculaEntity;
-import com.alkemy.disney.disney.entity.PersonajeEntity;
+import com.alkemy.disney.disney.entity.Pelicula;
+import com.alkemy.disney.disney.entity.Personaje;
 import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.PeliculaMapper;
 import com.alkemy.disney.disney.repository.PeliculaRepository;
@@ -33,16 +33,16 @@ public class PeliculaServiceImpl implements PeliculaService {
   }
 
   public PeliculaDTO save(PeliculaDTO dto) {
-    PeliculaEntity peliculaEntity = peliculaMapper.peliculaDTO2Entity(dto);
-    PeliculaEntity entitySave = this.peliculaRepository.save(peliculaEntity);
+    Pelicula pelicula = peliculaMapper.peliculaDTO2Entity(dto);
+    Pelicula entitySave = this.peliculaRepository.save(pelicula);
     return this.peliculaMapper.peliculaEntity2DTO(entitySave, true);
   }
 
   @Override
   public List<PeliculaBasicDTO> getAll(String name, Long idGenre, String order) {
     PeliculaFilterDTO peliculaFilterDTO = new PeliculaFilterDTO(name, idGenre, order);
-    Specification<PeliculaEntity> spec = PeliculaSpecification.getByFilters(peliculaFilterDTO);
-    List<PeliculaEntity> all = peliculaRepository.findAll(spec);
+    Specification<Pelicula> spec = PeliculaSpecification.getByFilters(peliculaFilterDTO);
+    List<Pelicula> all = peliculaRepository.findAll(spec);
     return peliculaMapper.pelicualEntityList2BasicDTOList(all);
   }
 
@@ -60,28 +60,28 @@ public class PeliculaServiceImpl implements PeliculaService {
 
   @Override
   public void addPersonaje(Long id, Long idPersonaje) {
-    PeliculaEntity entity = peliculaRepository.getById(id);
-    PersonajeEntity personajeEntity = personajeService.getById(idPersonaje);
-    entity.addPersonaje(personajeEntity);
+    Pelicula entity = peliculaRepository.getById(id);
+    Personaje personaje = personajeService.getById(idPersonaje);
+    entity.addPersonaje(personaje);
     peliculaRepository.save(entity);
   }
 
   @Override
   public void removePersonaje(Long id, Long idPersonaje) {
-    PeliculaEntity entity = peliculaRepository.getById(id);
-    PersonajeEntity personajeEntity = personajeService.getById(idPersonaje);
-    entity.removePersonaje(personajeEntity);
+    Pelicula entity = peliculaRepository.getById(id);
+    Personaje personaje = personajeService.getById(idPersonaje);
+    entity.removePersonaje(personaje);
     peliculaRepository.save(entity);
   }
 
   @Override
   public PeliculaDTO update(Long id, PeliculaDTO peliculaDTO) {
-    Optional<PeliculaEntity> entity = peliculaRepository.findById(id);
+    Optional<Pelicula> entity = peliculaRepository.findById(id);
     if (entity.isEmpty()) {
       throw new ParamNotFound("Id de presonaje no valido");
     }
     this.peliculaMapper.peliculaEntityRefreshValues(entity.get(), peliculaDTO);
-    PeliculaEntity peliculaSaved = this.peliculaRepository.save(entity.get());
+    Pelicula peliculaSaved = this.peliculaRepository.save(entity.get());
     return peliculaMapper.peliculaEntity2DTO(peliculaSaved, false);
   }
 }

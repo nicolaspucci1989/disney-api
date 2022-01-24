@@ -3,7 +3,7 @@ package com.alkemy.disney.disney.mapper;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
 import com.alkemy.disney.disney.dto.PersonajeBasicDTO;
 import com.alkemy.disney.disney.dto.PersonajeDTO;
-import com.alkemy.disney.disney.entity.PersonajeEntity;
+import com.alkemy.disney.disney.entity.Personaje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +15,8 @@ public class PersonajeMapper {
   @Autowired
   private PeliculaMapper peliculaMapper;
 
-  public PersonajeEntity personajeDTO2Entity(PersonajeDTO dto) {
-    PersonajeEntity entity = new PersonajeEntity();
+  public Personaje personajeDTO2Entity(PersonajeDTO dto) {
+    Personaje entity = new Personaje();
     entity.setImagen(dto.getImagen());
     entity.setNombre(dto.getNombre());
     entity.setEdad(dto.getEdad());
@@ -25,7 +25,7 @@ public class PersonajeMapper {
     return entity;
   }
 
-  public PersonajeDTO personajeEntity2DTO(PersonajeEntity entity, boolean loadPeliculas) {
+  public PersonajeDTO personajeEntity2DTO(Personaje entity, boolean loadPeliculas) {
     PersonajeDTO dto = new PersonajeDTO();
     dto.setId(entity.getId());
     dto.setImagen(entity.getImagen());
@@ -40,22 +40,22 @@ public class PersonajeMapper {
     return dto;
   }
 
-  public Set<PersonajeEntity> personajeDTOList2Entity(List<PersonajeDTO> dtos) {
-    Set<PersonajeEntity> entities = new HashSet<>();
+  public Set<Personaje> personajeDTOList2Entity(List<PersonajeDTO> dtos) {
+    Set<Personaje> entities = new HashSet<>();
     dtos.forEach(dto -> entities.add(this.personajeDTO2Entity(dto)));
     return entities;
   }
 
-  public List<PersonajeDTO> personajeEntitySet2DTOList(Collection<PersonajeEntity> entities, boolean loadPeliculas) {
+  public List<PersonajeDTO> personajeEntitySet2DTOList(Collection<Personaje> entities, boolean loadPeliculas) {
     List<PersonajeDTO> dtos = new ArrayList<>();
     entities.forEach(entity -> dtos.add(this.personajeEntity2DTO(entity, loadPeliculas)));
     return dtos;
   }
 
-  public List<PersonajeBasicDTO> personajeEntityList2BasicDTOList(Collection<PersonajeEntity> entities) {
+  public List<PersonajeBasicDTO> personajeEntityList2BasicDTOList(Collection<Personaje> entities) {
     List<PersonajeBasicDTO> dtos = new ArrayList<>();
     PersonajeBasicDTO basicDTO;
-    for (PersonajeEntity entity : entities) {
+    for (Personaje entity : entities) {
       basicDTO = new PersonajeBasicDTO();
       basicDTO.setImagen(entity.getImagen());
       basicDTO.setNombre(entity.getNombre());
@@ -64,7 +64,7 @@ public class PersonajeMapper {
     return dtos;
   }
 
-  public void personajeEntityRefreshValues(PersonajeEntity entity, PersonajeDTO personajeDTO) {
+  public void personajeEntityRefreshValues(Personaje entity, PersonajeDTO personajeDTO) {
     entity.setHistoria(personajeDTO.getHistoria());
     entity.setNombre(personajeDTO.getNombre());
     entity.setImagen(personajeDTO.getImagen());

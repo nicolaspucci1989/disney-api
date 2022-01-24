@@ -21,6 +21,7 @@ public class PeliculaDTO {
   @NotBlank(message = "Image is mandatory")
   private String titulo;
 
+  @NotNull(message = "Fecha es mandatorio")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
   private LocalDate fechaDeCreacion;
 

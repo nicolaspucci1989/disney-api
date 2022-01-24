@@ -17,9 +17,9 @@ import java.util.Set;
 @Setter
 @SQLDelete(sql = "UPDATE pelicula SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class PeliculaEntity {
+public class Pelicula {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   private String imagen;
@@ -40,12 +40,12 @@ public class PeliculaEntity {
       name = "pelicula_personaje",
       joinColumns = @JoinColumn(name = "pelicula_id"),
       inverseJoinColumns = @JoinColumn(name = "personaje_id"))
-  private Set<PersonajeEntity> personajes = new HashSet<>();
+  private Set<Personaje> personajes = new HashSet<>();
 
   // TODO: ver cascade
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "genero_id", insertable = false, updatable = false)
-  private GeneroEntity genero;
+  private Genero genero;
 
   // TODO: ver nullable
   @Column(name = "genero_id", nullable = false)
@@ -53,11 +53,11 @@ public class PeliculaEntity {
 
   private boolean deleted = Boolean.FALSE;
 
-  public void addPersonaje(PersonajeEntity personaje) {
+  public void addPersonaje(Personaje personaje) {
     personajes.add(personaje);
   }
 
-  public void removePersonaje(PersonajeEntity personaje) {
+  public void removePersonaje(Personaje personaje) {
     personajes.remove(personaje);
   }
 }
