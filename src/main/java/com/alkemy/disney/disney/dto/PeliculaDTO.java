@@ -15,21 +15,22 @@ import java.util.List;
 public class PeliculaDTO {
   private Long id;
 
-  @NotBlank(message = "Image is mandatory")
+  @NotBlank(message = "Imagen es requerido")
   private String imagen;
 
-  @NotBlank(message = "Image is mandatory")
+  @NotBlank(message = "Titulo es requerido")
   private String titulo;
 
-  @NotNull(message = "Fecha es mandatorio")
+  @NotNull(message = "Fecha es requerido")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
   private LocalDate fechaDeCreacion;
 
-  @NotNull(message = "Rango es mandatorio")
+  @NotNull(message = "Rango es requerido")
   @Range(max = 5, message = "Rango no valido")
   private Integer calificacion;
 
   private List<PersonajeDTO> personajes;
 
+  @NotNull(message = "Genero es requerido")
   private Long generoId;
 }
