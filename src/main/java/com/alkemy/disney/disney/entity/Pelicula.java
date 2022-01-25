@@ -3,6 +3,8 @@ package com.alkemy.disney.disney.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,9 +15,11 @@ import java.util.Set;
 @Table(name = "pelicula")
 @Getter
 @Setter
-public class PeliculaEntity {
+@SQLDelete(sql = "UPDATE pelicula SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
+public class Pelicula {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   private String imagen;
@@ -35,14 +39,25 @@ public class PeliculaEntity {
   @JoinTable(
       name = "pelicula_personaje",
       joinColumns = @JoinColumn(name = "pelicula_id"),
-      inverseJoinColumns = @JoinColumn(name = "personaje_id")
-  )
-  private Set<PersonajeEntity> personajes = new HashSet<>();
+      inverseJoinColumns = @JoinColumn(name = "personaje_id"))
+  private Set<Personaje> personajes = new HashSet<>();
 
-  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  // TODO: ver cascade
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "genero_id", insertable = false, updatable = false)
-  private GeneroEntity genero;
+  private Genero genero;
 
+  // TODO: ver nullable
   @Column(name = "genero_id", nullable = false)
   private Long generoId;
+
+  private boolean deleted = Boolean.FALSE;
+
+  public void addPersonaje(Personaje personaje) {
+    personajes.add(personaje);
+  }
+
+  public void removePersonaje(Personaje personaje) {
+    personajes.remove(personaje);
+  }
 }
