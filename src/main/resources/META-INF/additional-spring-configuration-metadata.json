@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "disney.email.sender",
+      "type": "java.lang.String",
+      "description": "Email addesss for email sender service."
+    },
+    {
+      "name": "disney.email.enabled",
+      "type": "java.lang.String",
+      "description": "Enable or disable email sender."
+    }
+  ] }
