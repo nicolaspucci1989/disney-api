@@ -36,8 +36,9 @@ public class AuthController {
   }
 
   @PostMapping("/signup")
-  public ResponseEntity<AuthenticationResponse> signup(@Valid @RequestBody UserDTO user) {
-    this.userDetailsService.save(user);
+  public ResponseEntity<AuthenticationResponse> signup(@Valid @RequestBody UserDTO user) throws Exception {
+    userDetailsService.checkIfUserExists(user);
+    userDetailsService.save(user);
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 

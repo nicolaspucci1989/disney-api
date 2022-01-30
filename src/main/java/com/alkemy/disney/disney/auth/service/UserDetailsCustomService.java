@@ -23,6 +23,13 @@ public class UserDetailsCustomService implements UserDetailsService {
     this.emailService = emailService;
   }
 
+  public void checkIfUserExists(UserDTO dto) throws Exception {
+    AppUser user = userRepository.findByUsername(dto.getUsername());
+    if(user != null) {
+      throw new Exception("Ya existe un usuario con ese mail");
+    }
+  }
+
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     AppUser appUser = userRepository.findByUsername(username);
