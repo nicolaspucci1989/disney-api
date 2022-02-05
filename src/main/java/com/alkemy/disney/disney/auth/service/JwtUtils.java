@@ -16,9 +16,12 @@ import java.util.function.Function;
 
 @Service
 public class JwtUtils {
+  private final Environment env;
+
   @Autowired
-  private Environment env;
-  private final String SECRET_KEY = "secret";
+  public JwtUtils(Environment env) {
+    this.env = env;
+  }
 
   public String extractUsername(String token) {
     return extractClaims(token, Claims::getSubject);
@@ -34,7 +37,7 @@ public class JwtUtils {
   }
 
   private Claims extractAllClaims(String token) {
-    return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+    return Jwts.parser().setSigningKey(env.getProperty("SECRET")).parseClaimsJws(token).getBody();
   }
 
   private Boolean isTokenExpired(String token) {
@@ -51,7 +54,7 @@ public class JwtUtils {
         .setExpiration(new Date(
             System.currentTimeMillis() * 100 * 60 * 60 * getExpirationInHours()
         ))
-        .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
+        .signWith(SignatureAlgorithm.HS256, env.getProperty("SECRET")).compact();
   }
 
   private int getExpirationInHours() {
