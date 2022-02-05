@@ -3,16 +3,21 @@ package com.alkemy.disney.disney.auth.service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 
 @Service
 public class JwtUtils {
+  @Autowired
+  private Environment env;
   private final String SECRET_KEY = "secret";
 
   public String extractUsername(String token) {
@@ -43,8 +48,14 @@ public class JwtUtils {
 
   private String createToken(Map<String, Object> claims, String subject) {
     return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-        .setExpiration(new Date(System.currentTimeMillis() * 100 * 60 * 60 * 10))
+        .setExpiration(new Date(
+            System.currentTimeMillis() * 100 * 60 * 60 * getExpirationInHours()
+        ))
         .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
+  }
+
+  private int getExpirationInHours() {
+    return Integer.parseInt(Objects.requireNonNull(env.getProperty("EXPIRATION_IN_HOURS")));
   }
 
   public Boolean validateToken(String token, UserDetails userDetails) {
