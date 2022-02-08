@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class PersonajeMapper {
@@ -47,9 +48,9 @@ public class PersonajeMapper {
   }
 
   public List<PersonajeDTO> personajeEntitySet2DTOList(Collection<Personaje> entities, boolean loadPeliculas) {
-    List<PersonajeDTO> dtos = new ArrayList<>();
-    entities.forEach(entity -> dtos.add(this.personajeEntity2DTO(entity, loadPeliculas)));
-    return dtos;
+    return entities.stream()
+        .map(e -> personajeEntity2DTO(e, loadPeliculas))
+        .collect(Collectors.toList());
   }
 
   public List<PersonajeBasicDTO> personajeEntityList2BasicDTOList(Collection<Personaje> entities) {
