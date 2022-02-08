@@ -8,7 +8,6 @@ import com.alkemy.disney.disney.entity.Personaje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,16 +52,14 @@ public class PeliculaMapper {
   }
 
   public List<PeliculaBasicDTO> pelicualEntityList2BasicDTOList(List<Pelicula> entities) {
-    List<PeliculaBasicDTO> dtos = new ArrayList<>();
-    PeliculaBasicDTO basicDTO;
-    for (Pelicula entity : entities) {
-      basicDTO = new PeliculaBasicDTO();
-      basicDTO.setImagen(entity.getImagen());
-      basicDTO.setTitulo(entity.getTitulo());
-      basicDTO.setFechaDeCreacion(entity.getFechaDeCreacion());
-      dtos.add(basicDTO);
-    }
-    return dtos;
+    return entities.stream().map(e ->
+            PeliculaBasicDTO.builder()
+                .imagen(e.getImagen())
+                .titulo(e.getTitulo())
+                .fechaDeCreacion(e.getFechaDeCreacion())
+                .build()
+        )
+        .collect(Collectors.toList());
   }
 
   public void peliculaEntityRefreshValues(Pelicula entity, PeliculaDTO peliculaDTO) {
