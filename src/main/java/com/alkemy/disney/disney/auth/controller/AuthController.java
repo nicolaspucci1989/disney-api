@@ -4,7 +4,7 @@ import com.alkemy.disney.disney.auth.dto.AuthenticationRequest;
 import com.alkemy.disney.disney.auth.dto.AuthenticationResponse;
 import com.alkemy.disney.disney.auth.dto.UserDTO;
 import com.alkemy.disney.disney.auth.service.JwtUtils;
-import com.alkemy.disney.disney.auth.service.UserDetailsCustomService;
+import com.alkemy.disney.disney.auth.service.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,21 +24,21 @@ import javax.validation.Valid;
 @RequestMapping("/auth")
 public class AuthController {
 
-  final private UserDetailsCustomService userDetailsService;
+  private final MyUserService myUserService;
   final private AuthenticationManager authenticationManager;
   final private JwtUtils jwtUtils;
 
   @Autowired
-  public AuthController(UserDetailsCustomService userDetailsService, AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
-    this.userDetailsService = userDetailsService;
+  public AuthController(MyUserService myUserService, AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
+    this.myUserService = myUserService;
     this.authenticationManager = authenticationManager;
     this.jwtUtils = jwtUtils;
   }
 
   @PostMapping("/signup")
   public ResponseEntity<AuthenticationResponse> signup(@Valid @RequestBody UserDTO user) throws Exception {
-    userDetailsService.checkIfUserExists(user);
-    userDetailsService.save(user);
+    myUserService.checkIfUserExists(user);
+    myUserService.save(user);
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
