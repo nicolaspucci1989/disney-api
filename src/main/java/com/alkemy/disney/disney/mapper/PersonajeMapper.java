@@ -7,7 +7,10 @@ import com.alkemy.disney.disney.entity.Personaje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -54,15 +57,14 @@ public class PersonajeMapper {
   }
 
   public List<PersonajeBasicDTO> personajeEntityList2BasicDTOList(Collection<Personaje> entities) {
-    List<PersonajeBasicDTO> dtos = new ArrayList<>();
-    PersonajeBasicDTO basicDTO;
-    for (Personaje entity : entities) {
-      basicDTO = new PersonajeBasicDTO();
-      basicDTO.setImagen(entity.getImagen());
-      basicDTO.setNombre(entity.getNombre());
-      dtos.add(basicDTO);
-    }
-    return dtos;
+    return entities.stream()
+        .map(e -> PersonajeBasicDTO
+            .builder()
+            .imagen(e.getImagen())
+            .nombre(e.getNombre())
+            .build()
+        )
+        .collect(Collectors.toList());
   }
 
   public void personajeEntityRefreshValues(Personaje entity, PersonajeDTO personajeDTO) {
