@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class PeliculaMapper {
@@ -48,9 +49,7 @@ public class PeliculaMapper {
   }
 
   public List<PeliculaDTO> peliculaEntityList2DTOList(Set<Pelicula> entities, boolean loadPersonajes) {
-    List<PeliculaDTO> dtos = new ArrayList<>();
-    entities.forEach(entity -> dtos.add(this.peliculaEntity2DTO(entity, loadPersonajes)));
-    return dtos;
+    return entities.stream().map(pelicula -> peliculaEntity2DTO(pelicula, loadPersonajes)).collect(Collectors.toList());
   }
 
   public List<PeliculaBasicDTO> pelicualEntityList2BasicDTOList(List<Pelicula> entities) {
