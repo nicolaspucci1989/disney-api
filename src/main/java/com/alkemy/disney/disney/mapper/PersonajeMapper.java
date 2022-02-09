@@ -7,7 +7,10 @@ import com.alkemy.disney.disney.entity.Personaje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class PersonajeMapper {
@@ -41,27 +44,25 @@ public class PersonajeMapper {
   }
 
   public Set<Personaje> personajeDTOList2Entity(List<PersonajeDTO> dtos) {
-    Set<Personaje> entities = new HashSet<>();
-    dtos.forEach(dto -> entities.add(this.personajeDTO2Entity(dto)));
-    return entities;
+    return dtos.stream()
+        .map(this::personajeDTO2Entity).collect(Collectors.toSet());
   }
 
   public List<PersonajeDTO> personajeEntitySet2DTOList(Collection<Personaje> entities, boolean loadPeliculas) {
-    List<PersonajeDTO> dtos = new ArrayList<>();
-    entities.forEach(entity -> dtos.add(this.personajeEntity2DTO(entity, loadPeliculas)));
-    return dtos;
+    return entities.stream()
+        .map(e -> personajeEntity2DTO(e, loadPeliculas))
+        .collect(Collectors.toList());
   }
 
   public List<PersonajeBasicDTO> personajeEntityList2BasicDTOList(Collection<Personaje> entities) {
-    List<PersonajeBasicDTO> dtos = new ArrayList<>();
-    PersonajeBasicDTO basicDTO;
-    for (Personaje entity : entities) {
-      basicDTO = new PersonajeBasicDTO();
-      basicDTO.setImagen(entity.getImagen());
-      basicDTO.setNombre(entity.getNombre());
-      dtos.add(basicDTO);
-    }
-    return dtos;
+    return entities.stream()
+        .map(e -> PersonajeBasicDTO
+            .builder()
+            .imagen(e.getImagen())
+            .nombre(e.getNombre())
+            .build()
+        )
+        .collect(Collectors.toList());
   }
 
   public void personajeEntityRefreshValues(Personaje entity, PersonajeDTO personajeDTO) {

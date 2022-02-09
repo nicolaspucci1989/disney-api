@@ -8,9 +8,9 @@ import com.alkemy.disney.disney.entity.Personaje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class PeliculaMapper {
@@ -48,22 +48,18 @@ public class PeliculaMapper {
   }
 
   public List<PeliculaDTO> peliculaEntityList2DTOList(Set<Pelicula> entities, boolean loadPersonajes) {
-    List<PeliculaDTO> dtos = new ArrayList<>();
-    entities.forEach(entity -> dtos.add(this.peliculaEntity2DTO(entity, loadPersonajes)));
-    return dtos;
+    return entities.stream().map(pelicula -> peliculaEntity2DTO(pelicula, loadPersonajes)).collect(Collectors.toList());
   }
 
   public List<PeliculaBasicDTO> pelicualEntityList2BasicDTOList(List<Pelicula> entities) {
-    List<PeliculaBasicDTO> dtos = new ArrayList<>();
-    PeliculaBasicDTO basicDTO;
-    for (Pelicula entity : entities) {
-      basicDTO = new PeliculaBasicDTO();
-      basicDTO.setImagen(entity.getImagen());
-      basicDTO.setTitulo(entity.getTitulo());
-      basicDTO.setFechaDeCreacion(entity.getFechaDeCreacion());
-      dtos.add(basicDTO);
-    }
-    return dtos;
+    return entities.stream().map(e ->
+            PeliculaBasicDTO.builder()
+                .imagen(e.getImagen())
+                .titulo(e.getTitulo())
+                .fechaDeCreacion(e.getFechaDeCreacion())
+                .build()
+        )
+        .collect(Collectors.toList());
   }
 
   public void peliculaEntityRefreshValues(Pelicula entity, PeliculaDTO peliculaDTO) {
