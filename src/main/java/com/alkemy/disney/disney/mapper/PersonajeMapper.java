@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -45,9 +44,8 @@ public class PersonajeMapper {
   }
 
   public Set<Personaje> personajeDTOList2Entity(List<PersonajeDTO> dtos) {
-    Set<Personaje> entities = new HashSet<>();
-    dtos.forEach(dto -> entities.add(this.personajeDTO2Entity(dto)));
-    return entities;
+    return dtos.stream()
+        .map(this::personajeDTO2Entity).collect(Collectors.toSet());
   }
 
   public List<PersonajeDTO> personajeEntitySet2DTOList(Collection<Personaje> entities, boolean loadPeliculas) {
