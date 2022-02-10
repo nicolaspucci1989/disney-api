@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class PeliculaMapper {
+public class MovieMapper {
 
   public Movie peliculaDTO2Entity(MovieDTO dto) {
     Movie entity = new Movie();

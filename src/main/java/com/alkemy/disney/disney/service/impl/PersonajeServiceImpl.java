@@ -6,7 +6,7 @@ import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.dto.CharacterFilterDTO;
 import com.alkemy.disney.disney.entity.Personaje;
 import com.alkemy.disney.disney.exception.ParamNotFound;
-import com.alkemy.disney.disney.mapper.PeliculaMapper;
+import com.alkemy.disney.disney.mapper.MovieMapper;
 import com.alkemy.disney.disney.mapper.PersonajeMapper;
 import com.alkemy.disney.disney.repository.PersonajeRepository;
 import com.alkemy.disney.disney.repository.specifications.PersonajeSpecification;
@@ -23,13 +23,13 @@ public class PersonajeServiceImpl implements PersonajeService {
 
   private final PersonajeRepository personajeRepository;
   private final PersonajeMapper personajeMapper;
-  private final PeliculaMapper peliculaMapper;
+  private final MovieMapper movieMapper;
 
   @Autowired
-  public PersonajeServiceImpl(PersonajeRepository personajeRepository, PersonajeMapper personajeMapper, PeliculaMapper peliculaMapper) {
+  public PersonajeServiceImpl(PersonajeRepository personajeRepository, PersonajeMapper personajeMapper, MovieMapper movieMapper) {
     this.personajeRepository = personajeRepository;
     this.personajeMapper = personajeMapper;
-    this.peliculaMapper = peliculaMapper;
+    this.movieMapper = movieMapper;
   }
 
   @Override
@@ -77,7 +77,7 @@ public class PersonajeServiceImpl implements PersonajeService {
 
   private CharacterDTO getPersonajePersonajeDTOFunction(Personaje personajeEntity) {
     CharacterDTO characterDTO = this.personajeMapper.personajeEntity2DTO(personajeEntity);
-    List<MovieDTO> movieDTOS = peliculaMapper.peliculaEntityList2DTOList(personajeEntity.getMovies());
+    List<MovieDTO> movieDTOS = movieMapper.peliculaEntityList2DTOList(personajeEntity.getMovies());
     characterDTO.setPeliculas(movieDTOS);
     return characterDTO;
   }
