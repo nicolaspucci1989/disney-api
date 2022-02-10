@@ -2,7 +2,7 @@ package com.alkemy.disney.disney.service.impl;
 
 import com.alkemy.disney.disney.dto.MovieBasicDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
-import com.alkemy.disney.disney.dto.PeliculaFilterDTO;
+import com.alkemy.disney.disney.dto.MovieFilterDTO;
 import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.entity.Pelicula;
 import com.alkemy.disney.disney.entity.Personaje;
@@ -48,8 +48,8 @@ public class PeliculaServiceImpl implements PeliculaService {
 
   @Override
   public List<MovieBasicDTO> getAll(String name, Long idGenre, String order) {
-    PeliculaFilterDTO peliculaFilterDTO = new PeliculaFilterDTO(name, idGenre, order);
-    Specification<Pelicula> spec = PeliculaSpecification.getByFilters(peliculaFilterDTO);
+    MovieFilterDTO movieFilterDTO = new MovieFilterDTO(name, idGenre, order);
+    Specification<Pelicula> spec = PeliculaSpecification.getByFilters(movieFilterDTO);
     List<Pelicula> all = peliculaRepository.findAll(spec);
     return peliculaMapper.pelicualEntityList2BasicDTOList(all);
   }
