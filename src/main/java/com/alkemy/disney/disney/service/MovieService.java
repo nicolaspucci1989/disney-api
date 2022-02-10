@@ -5,7 +5,7 @@ import com.alkemy.disney.disney.dto.MovieDTO;
 
 import java.util.List;
 
-public interface PeliculaService {
+public interface MovieService {
   MovieDTO save(MovieDTO dto);
 
   List<MovieBasicDTO> getAll(String name, Long idGenre, String order);
