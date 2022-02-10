@@ -10,7 +10,7 @@ import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.MovieMapper;
 import com.alkemy.disney.disney.mapper.CharacterMapper;
 import com.alkemy.disney.disney.repository.PeliculaRepository;
-import com.alkemy.disney.disney.repository.specifications.PeliculaSpecification;
+import com.alkemy.disney.disney.repository.specifications.MovieSpecification;
 import com.alkemy.disney.disney.service.PeliculaService;
 import com.alkemy.disney.disney.service.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class PeliculaServiceImpl implements PeliculaService {
   @Override
   public List<MovieBasicDTO> getAll(String name, Long idGenre, String order) {
     MovieFilterDTO movieFilterDTO = new MovieFilterDTO(name, idGenre, order);
-    Specification<Movie> spec = PeliculaSpecification.getByFilters(movieFilterDTO);
+    Specification<Movie> spec = MovieSpecification.getByFilters(movieFilterDTO);
     List<Movie> all = peliculaRepository.findAll(spec);
     return movieMapper.pelicualEntityList2BasicDTOList(all);
   }

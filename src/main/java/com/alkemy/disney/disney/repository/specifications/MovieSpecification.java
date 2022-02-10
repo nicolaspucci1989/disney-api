@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class PeliculaSpecification {
+public class MovieSpecification {
   public static Specification<Movie> getByFilters(MovieFilterDTO filterDTO) {
     return (root, criteriaQuery, criteriaBuilder) -> {
       List<Predicate> predicates = new ArrayList<>();
