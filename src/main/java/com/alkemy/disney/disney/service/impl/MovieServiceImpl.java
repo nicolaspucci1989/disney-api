@@ -12,7 +12,7 @@ import com.alkemy.disney.disney.mapper.CharacterMapper;
 import com.alkemy.disney.disney.repository.MovieRepository;
 import com.alkemy.disney.disney.repository.specifications.MovieSpecification;
 import com.alkemy.disney.disney.service.MovieService;
-import com.alkemy.disney.disney.service.PersonajeService;
+import com.alkemy.disney.disney.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -25,15 +25,15 @@ import java.util.Set;
 public class MovieServiceImpl implements MovieService {
 
   private final MovieRepository movieRepository;
-  private final PersonajeService personajeService;
+  private final CharacterService characterService;
   private final MovieMapper movieMapper;
   private final CharacterMapper characterMapper;
 
   @Autowired
-  public MovieServiceImpl(MovieMapper movieMapper, MovieRepository movieRepository, PersonajeService personajeService, CharacterMapper characterMapper) {
+  public MovieServiceImpl(MovieMapper movieMapper, MovieRepository movieRepository, CharacterService characterService, CharacterMapper characterMapper) {
     this.movieMapper = movieMapper;
     this.movieRepository = movieRepository;
-    this.personajeService = personajeService;
+    this.characterService = characterService;
     this.characterMapper = characterMapper;
   }
 
@@ -69,7 +69,7 @@ public class MovieServiceImpl implements MovieService {
   @Override
   public void addPersonaje(Long id, Long idPersonaje) {
     Movie entity = movieRepository.getById(id);
-    Personaje personaje = personajeService.getById(idPersonaje);
+    Personaje personaje = characterService.getById(idPersonaje);
     entity.addPersonaje(personaje);
     movieRepository.save(entity);
   }
@@ -77,7 +77,7 @@ public class MovieServiceImpl implements MovieService {
   @Override
   public void removePersonaje(Long id, Long idPersonaje) {
     Movie entity = movieRepository.getById(id);
-    Personaje personaje = personajeService.getById(idPersonaje);
+    Personaje personaje = characterService.getById(idPersonaje);
     entity.removePersonaje(personaje);
     movieRepository.save(entity);
   }

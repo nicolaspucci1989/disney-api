@@ -10,7 +10,7 @@ import com.alkemy.disney.disney.mapper.MovieMapper;
 import com.alkemy.disney.disney.mapper.CharacterMapper;
 import com.alkemy.disney.disney.repository.CharacterRepository;
 import com.alkemy.disney.disney.repository.specifications.CharacterSpecification;
-import com.alkemy.disney.disney.service.PersonajeService;
+import com.alkemy.disney.disney.service.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -19,14 +19,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PersonajeServiceImpl implements PersonajeService {
+public class CharacterServiceImpl implements CharacterService {
 
   private final CharacterRepository characterRepository;
   private final CharacterMapper characterMapper;
   private final MovieMapper movieMapper;
 
   @Autowired
-  public PersonajeServiceImpl(CharacterRepository characterRepository, CharacterMapper characterMapper, MovieMapper movieMapper) {
+  public CharacterServiceImpl(CharacterRepository characterRepository, CharacterMapper characterMapper, MovieMapper movieMapper) {
     this.characterRepository = characterRepository;
     this.characterMapper = characterMapper;
     this.movieMapper = movieMapper;

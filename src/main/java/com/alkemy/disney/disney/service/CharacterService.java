@@ -6,7 +6,7 @@ import com.alkemy.disney.disney.entity.Personaje;
 
 import java.util.List;
 
-public interface PersonajeService {
+public interface CharacterService {
   CharacterDTO save(CharacterDTO dto);
 
   List<CharacterBasicDTO> getAll(String name, Integer age, List<Long> idMovies);
