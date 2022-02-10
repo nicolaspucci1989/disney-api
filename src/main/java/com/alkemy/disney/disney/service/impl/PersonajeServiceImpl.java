@@ -32,6 +32,7 @@ public class PersonajeServiceImpl implements PersonajeService {
     this.peliculaMapper = peliculaMapper;
   }
 
+  @Override
   public PersonajeDTO save(PersonajeDTO dto) {
     Personaje entity = personajeMapper.personajeDTO2Entity(dto);
     Personaje save = personajeRepository.save(entity);
@@ -49,12 +50,7 @@ public class PersonajeServiceImpl implements PersonajeService {
   @Override
   public PersonajeDTO getDetailsById(Long id) {
     return this.personajeRepository.findById(id)
-        .map(e -> {
-          PersonajeDTO personajeDTO = this.personajeMapper.personajeEntity2DTO(e);
-          List<PeliculaDTO> peliculaDTOS = peliculaMapper.peliculaEntityList2DTOList(e.getPeliculas());
-          personajeDTO.setPeliculas(peliculaDTOS);
-          return personajeDTO;
-        })
+        .map(this::getPersonajePersonajeDTOFunction)
         .orElseThrow(() -> new ParamNotFound("no se encontro"));
   }
 
@@ -78,4 +74,12 @@ public class PersonajeServiceImpl implements PersonajeService {
   public Personaje getById(Long idPersonaje) {
     return this.personajeRepository.getById(idPersonaje);
   }
+
+  private PersonajeDTO getPersonajePersonajeDTOFunction(Personaje personajeEntity) {
+    PersonajeDTO personajeDTO = this.personajeMapper.personajeEntity2DTO(personajeEntity);
+    List<PeliculaDTO> peliculaDTOS = peliculaMapper.peliculaEntityList2DTOList(personajeEntity.getPeliculas());
+    personajeDTO.setPeliculas(peliculaDTOS);
+    return personajeDTO;
+  }
+
 }

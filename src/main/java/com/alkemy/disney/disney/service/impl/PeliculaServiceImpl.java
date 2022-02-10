@@ -37,15 +37,13 @@ public class PeliculaServiceImpl implements PeliculaService {
     this.personajeMapper = personajeMapper;
   }
 
+  @Override
   public PeliculaDTO save(PeliculaDTO dto) {
     Pelicula pelicula = peliculaMapper.peliculaDTO2Entity(dto);
     Set<Personaje> personajes = personajeMapper.personajeDTOList2Entity(dto.getPersonajes());
     pelicula.setPersonajes(personajes);
     Pelicula entitySave = this.peliculaRepository.save(pelicula);
-    PeliculaDTO peliculaDTO = this.peliculaMapper.peliculaEntity2DTO(entitySave);
-    List<PersonajeDTO> personajeDTOS = personajeMapper.personajeEntitySet2DTOList(pelicula.getPersonajes());
-    peliculaDTO.setPersonajes(personajeDTOS);
-    return peliculaDTO;
+    return getPeliculaDetailsDTO(entitySave);
   }
 
   @Override
@@ -59,12 +57,7 @@ public class PeliculaServiceImpl implements PeliculaService {
   @Override
   public PeliculaDTO getDetailsById(Long id) {
     return this.peliculaRepository.findById(id)
-        .map(e -> {
-          PeliculaDTO peliculaDTO = this.peliculaMapper.peliculaEntity2DTO(e);
-          List<PersonajeDTO> personajeDTOS = this.personajeMapper.personajeEntitySet2DTOList(e.getPersonajes());
-          peliculaDTO.setPersonajes(personajeDTOS);
-          return peliculaDTO;
-        })
+        .map(this::getPeliculaDetailsDTO)
         .orElseThrow(() -> new ParamNotFound("Id de pelicula no valido"));
   }
 
@@ -98,5 +91,12 @@ public class PeliculaServiceImpl implements PeliculaService {
     this.peliculaMapper.peliculaEntityRefreshValues(entity.get(), peliculaDTO);
     Pelicula peliculaSaved = this.peliculaRepository.save(entity.get());
     return peliculaMapper.peliculaEntity2DTO(peliculaSaved);
+  }
+
+  private PeliculaDTO getPeliculaDetailsDTO(Pelicula pelicula) {
+    PeliculaDTO peliculaDTO = this.peliculaMapper.peliculaEntity2DTO(pelicula);
+    List<PersonajeDTO> personajeDTOS = this.personajeMapper.personajeEntitySet2DTOList(pelicula.getPersonajes());
+    peliculaDTO.setPersonajes(personajeDTOS);
+    return peliculaDTO;
   }
 }
