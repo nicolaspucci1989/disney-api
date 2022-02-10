@@ -1,10 +1,12 @@
 package com.alkemy.disney.disney.service.impl;
 
+import com.alkemy.disney.disney.dto.PeliculaDTO;
 import com.alkemy.disney.disney.dto.PersonajeBasicDTO;
 import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.dto.PersonajeFilterDTO;
 import com.alkemy.disney.disney.entity.Personaje;
 import com.alkemy.disney.disney.exception.ParamNotFound;
+import com.alkemy.disney.disney.mapper.PeliculaMapper;
 import com.alkemy.disney.disney.mapper.PersonajeMapper;
 import com.alkemy.disney.disney.repository.PersonajeRepository;
 import com.alkemy.disney.disney.repository.specifications.PersonajeSpecification;
@@ -21,17 +23,19 @@ public class PersonajeServiceImpl implements PersonajeService {
 
   private final PersonajeRepository personajeRepository;
   private final PersonajeMapper personajeMapper;
+  private final PeliculaMapper peliculaMapper;
 
   @Autowired
-  public PersonajeServiceImpl(PersonajeRepository personajeRepository, PersonajeMapper personajeMapper) {
+  public PersonajeServiceImpl(PersonajeRepository personajeRepository, PersonajeMapper personajeMapper, PeliculaMapper peliculaMapper) {
     this.personajeRepository = personajeRepository;
     this.personajeMapper = personajeMapper;
+    this.peliculaMapper = peliculaMapper;
   }
 
   public PersonajeDTO save(PersonajeDTO dto) {
     Personaje entity = personajeMapper.personajeDTO2Entity(dto);
     Personaje save = personajeRepository.save(entity);
-    return personajeMapper.personajeEntity2DTO(save, false);
+    return personajeMapper.personajeEntity2DTO(save);
   }
 
   @Override
@@ -45,7 +49,12 @@ public class PersonajeServiceImpl implements PersonajeService {
   @Override
   public PersonajeDTO getDetailsById(Long id) {
     return this.personajeRepository.findById(id)
-        .map(e -> this.personajeMapper.personajeEntity2DTO(e, true))
+        .map(e -> {
+          PersonajeDTO personajeDTO = this.personajeMapper.personajeEntity2DTO(e);
+          List<PeliculaDTO> peliculaDTOS = peliculaMapper.peliculaEntityList2DTOList(e.getPeliculas());
+          personajeDTO.setPeliculas(peliculaDTOS);
+          return personajeDTO;
+        })
         .orElseThrow(() -> new ParamNotFound("no se encontro"));
   }
 
@@ -57,7 +66,7 @@ public class PersonajeServiceImpl implements PersonajeService {
     }
     this.personajeMapper.personajeEntityRefreshValues(entity.get(), personajeDTO);
     Personaje personajeSaved = this.personajeRepository.save(entity.get());
-    return personajeMapper.personajeEntity2DTO(personajeSaved, false);
+    return personajeMapper.personajeEntity2DTO(personajeSaved);
   }
 
   @Override

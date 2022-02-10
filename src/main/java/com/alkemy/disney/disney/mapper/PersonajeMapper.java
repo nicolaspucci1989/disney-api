@@ -1,10 +1,8 @@
 package com.alkemy.disney.disney.mapper;
 
-import com.alkemy.disney.disney.dto.PeliculaDTO;
 import com.alkemy.disney.disney.dto.PersonajeBasicDTO;
 import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.entity.Personaje;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -14,9 +12,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class PersonajeMapper {
-
-  @Autowired
-  private PeliculaMapper peliculaMapper;
 
   public Personaje personajeDTO2Entity(PersonajeDTO dto) {
     Personaje entity = new Personaje();
@@ -28,7 +23,7 @@ public class PersonajeMapper {
     return entity;
   }
 
-  public PersonajeDTO personajeEntity2DTO(Personaje entity, boolean loadPeliculas) {
+  public PersonajeDTO personajeEntity2DTO(Personaje entity) {
     PersonajeDTO dto = new PersonajeDTO();
     dto.setId(entity.getId());
     dto.setImagen(entity.getImagen());
@@ -36,10 +31,6 @@ public class PersonajeMapper {
     dto.setEdad(entity.getEdad());
     dto.setPeso(entity.getPeso());
     dto.setHistoria(entity.getHistoria());
-    if (loadPeliculas) {
-      List<PeliculaDTO> peliculaDTOS = this.peliculaMapper.peliculaEntityList2DTOList(entity.getPeliculas(), false);
-      dto.setPeliculas(peliculaDTOS);
-    }
     return dto;
   }
 
@@ -48,9 +39,9 @@ public class PersonajeMapper {
         .map(this::personajeDTO2Entity).collect(Collectors.toSet());
   }
 
-  public List<PersonajeDTO> personajeEntitySet2DTOList(Collection<Personaje> entities, boolean loadPeliculas) {
+  public List<PersonajeDTO> personajeEntitySet2DTOList(Collection<Personaje> entities) {
     return entities.stream()
-        .map(e -> personajeEntity2DTO(e, loadPeliculas))
+        .map(this::personajeEntity2DTO)
         .collect(Collectors.toList());
   }
 
