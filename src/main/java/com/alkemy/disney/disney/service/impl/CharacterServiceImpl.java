@@ -4,7 +4,7 @@ import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.dto.CharacterBasicDTO;
 import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.dto.CharacterFilterDTO;
-import com.alkemy.disney.disney.entity.Personaje;
+import com.alkemy.disney.disney.entity.Character;
 import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.MovieMapper;
 import com.alkemy.disney.disney.mapper.CharacterMapper;
@@ -34,16 +34,16 @@ public class CharacterServiceImpl implements CharacterService {
 
   @Override
   public CharacterDTO save(CharacterDTO dto) {
-    Personaje entity = characterMapper.personajeDTO2Entity(dto);
-    Personaje save = characterRepository.save(entity);
+    Character entity = characterMapper.personajeDTO2Entity(dto);
+    Character save = characterRepository.save(entity);
     return characterMapper.personajeEntity2DTO(save);
   }
 
   @Override
   public List<CharacterBasicDTO> getAll(String name, Integer age, List<Long> idMovies) {
     CharacterFilterDTO characterFilterDTO = new CharacterFilterDTO(name, age, idMovies);
-    Specification<Personaje> spec = CharacterSpecification.getByFilters(characterFilterDTO);
-    List<Personaje> entities = this.characterRepository.findAll(spec);
+    Specification<Character> spec = CharacterSpecification.getByFilters(characterFilterDTO);
+    List<Character> entities = this.characterRepository.findAll(spec);
     return characterMapper.personajeEntityList2BasicDTOList(entities);
   }
 
@@ -56,13 +56,13 @@ public class CharacterServiceImpl implements CharacterService {
 
   @Override
   public CharacterDTO update(Long id, CharacterDTO characterDTO) {
-    Optional<Personaje> entity = characterRepository.findById(id);
+    Optional<Character> entity = characterRepository.findById(id);
     if (entity.isEmpty()) {
       throw new ParamNotFound("Id de presonaje no valido");
     }
     this.characterMapper.personajeEntityRefreshValues(entity.get(), characterDTO);
-    Personaje personajeSaved = this.characterRepository.save(entity.get());
-    return characterMapper.personajeEntity2DTO(personajeSaved);
+    Character characterSaved = this.characterRepository.save(entity.get());
+    return characterMapper.personajeEntity2DTO(characterSaved);
   }
 
   @Override
@@ -71,13 +71,13 @@ public class CharacterServiceImpl implements CharacterService {
   }
 
   @Override
-  public Personaje getById(Long idPersonaje) {
+  public Character getById(Long idPersonaje) {
     return this.characterRepository.getById(idPersonaje);
   }
 
-  private CharacterDTO getPersonajePersonajeDTOFunction(Personaje personajeEntity) {
-    CharacterDTO characterDTO = this.characterMapper.personajeEntity2DTO(personajeEntity);
-    List<MovieDTO> movieDTOS = movieMapper.peliculaEntityList2DTOList(personajeEntity.getMovies());
+  private CharacterDTO getPersonajePersonajeDTOFunction(Character character) {
+    CharacterDTO characterDTO = this.characterMapper.personajeEntity2DTO(character);
+    List<MovieDTO> movieDTOS = movieMapper.peliculaEntityList2DTOList(character.getMovies());
     characterDTO.setPeliculas(movieDTOS);
     return characterDTO;
   }

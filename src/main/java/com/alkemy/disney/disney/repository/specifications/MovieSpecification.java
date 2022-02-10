@@ -27,7 +27,7 @@ public class MovieSpecification {
 
       if (filterDTO.getIdGenre() != null) {
         predicates.add(
-            criteriaBuilder.equal(root.<Long>get("genero"), filterDTO.getIdGenre())
+            criteriaBuilder.equal(root.<Long>get("genre"), filterDTO.getIdGenre())
         );
       }
 

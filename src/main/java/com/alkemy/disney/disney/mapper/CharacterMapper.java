@@ -2,7 +2,7 @@ package com.alkemy.disney.disney.mapper;
 
 import com.alkemy.disney.disney.dto.CharacterBasicDTO;
 import com.alkemy.disney.disney.dto.CharacterDTO;
-import com.alkemy.disney.disney.entity.Personaje;
+import com.alkemy.disney.disney.entity.Character;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 @Component
 public class CharacterMapper {
 
-  public Personaje personajeDTO2Entity(CharacterDTO dto) {
-    Personaje entity = new Personaje();
+  public Character personajeDTO2Entity(CharacterDTO dto) {
+    Character entity = new Character();
     entity.setImagen(dto.getImagen());
     entity.setNombre(dto.getNombre());
     entity.setEdad(dto.getEdad());
@@ -23,7 +23,7 @@ public class CharacterMapper {
     return entity;
   }
 
-  public CharacterDTO personajeEntity2DTO(Personaje entity) {
+  public CharacterDTO personajeEntity2DTO(Character entity) {
     CharacterDTO dto = new CharacterDTO();
     dto.setId(entity.getId());
     dto.setImagen(entity.getImagen());
@@ -34,18 +34,18 @@ public class CharacterMapper {
     return dto;
   }
 
-  public Set<Personaje> personajeDTOList2Entity(List<CharacterDTO> dtos) {
+  public Set<Character> personajeDTOList2Entity(List<CharacterDTO> dtos) {
     return dtos.stream()
         .map(this::personajeDTO2Entity).collect(Collectors.toSet());
   }
 
-  public List<CharacterDTO> personajeEntitySet2DTOList(Collection<Personaje> entities) {
+  public List<CharacterDTO> personajeEntitySet2DTOList(Collection<Character> entities) {
     return entities.stream()
         .map(this::personajeEntity2DTO)
         .collect(Collectors.toList());
   }
 
-  public List<CharacterBasicDTO> personajeEntityList2BasicDTOList(Collection<Personaje> entities) {
+  public List<CharacterBasicDTO> personajeEntityList2BasicDTOList(Collection<Character> entities) {
     return entities.stream()
         .map(e -> CharacterBasicDTO
             .builder()
@@ -56,7 +56,7 @@ public class CharacterMapper {
         .collect(Collectors.toList());
   }
 
-  public void personajeEntityRefreshValues(Personaje entity, CharacterDTO characterDTO) {
+  public void personajeEntityRefreshValues(Character entity, CharacterDTO characterDTO) {
     entity.setHistoria(characterDTO.getHistoria());
     entity.setNombre(characterDTO.getNombre());
     entity.setImagen(characterDTO.getImagen());

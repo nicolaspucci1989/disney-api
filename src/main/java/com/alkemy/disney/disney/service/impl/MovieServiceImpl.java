@@ -5,7 +5,7 @@ import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.dto.MovieFilterDTO;
 import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.entity.Movie;
-import com.alkemy.disney.disney.entity.Personaje;
+import com.alkemy.disney.disney.entity.Character;
 import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.MovieMapper;
 import com.alkemy.disney.disney.mapper.CharacterMapper;
@@ -40,8 +40,8 @@ public class MovieServiceImpl implements MovieService {
   @Override
   public MovieDTO save(MovieDTO dto) {
     Movie movie = movieMapper.peliculaDTO2Entity(dto);
-    Set<Personaje> personajes = characterMapper.personajeDTOList2Entity(dto.getPersonajes());
-    movie.setPersonajes(personajes);
+    Set<Character> characters = characterMapper.personajeDTOList2Entity(dto.getPersonajes());
+    movie.setCharacters(characters);
     Movie entitySave = this.movieRepository.save(movie);
     return getPeliculaDetailsDTO(entitySave);
   }
@@ -69,16 +69,16 @@ public class MovieServiceImpl implements MovieService {
   @Override
   public void addPersonaje(Long id, Long idPersonaje) {
     Movie entity = movieRepository.getById(id);
-    Personaje personaje = characterService.getById(idPersonaje);
-    entity.addPersonaje(personaje);
+    Character character = characterService.getById(idPersonaje);
+    entity.addPersonaje(character);
     movieRepository.save(entity);
   }
 
   @Override
   public void removePersonaje(Long id, Long idPersonaje) {
     Movie entity = movieRepository.getById(id);
-    Personaje personaje = characterService.getById(idPersonaje);
-    entity.removePersonaje(personaje);
+    Character character = characterService.getById(idPersonaje);
+    entity.removePersonaje(character);
     movieRepository.save(entity);
   }
 
@@ -95,7 +95,7 @@ public class MovieServiceImpl implements MovieService {
 
   private MovieDTO getPeliculaDetailsDTO(Movie movie) {
     MovieDTO movieDTO = this.movieMapper.peliculaEntity2DTO(movie);
-    List<CharacterDTO> characterDTOS = this.characterMapper.personajeEntitySet2DTOList(movie.getPersonajes());
+    List<CharacterDTO> characterDTOS = this.characterMapper.personajeEntitySet2DTOList(movie.getCharacters());
     movieDTO.setPersonajes(characterDTOS);
     return movieDTO;
   }

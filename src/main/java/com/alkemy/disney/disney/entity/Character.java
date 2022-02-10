@@ -12,9 +12,10 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE personaje SET deleted = true WHERE id=?")
+@Table(name = "character_entity")
+@SQLDelete(sql = "UPDATE character SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class Personaje {
+public class Character {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -29,7 +30,7 @@ public class Personaje {
 
   private String historia;
 
-  @ManyToMany(mappedBy = "personajes", cascade = CascadeType.ALL)
+  @ManyToMany(mappedBy = "characters", cascade = CascadeType.ALL)
   private Set<Movie> movies = new HashSet<>();
 
   private boolean deleted = Boolean.FALSE;
