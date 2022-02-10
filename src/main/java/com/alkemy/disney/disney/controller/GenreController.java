@@ -14,12 +14,12 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/genre")
-public class GeneroController {
+public class GenreController {
 
   private final GeneroService generoService;
 
   @Autowired
-  public GeneroController(GeneroService generoService) {
+  public GenreController(GeneroService generoService) {
     this.generoService = generoService;
   }
 
