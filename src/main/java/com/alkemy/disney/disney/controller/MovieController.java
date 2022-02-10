@@ -13,12 +13,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/movies")
-public class PeliculaController {
+public class MovieController {
 
   private final PeliculaService peliculaService;
 
   @Autowired
-  public PeliculaController(PeliculaService peliculaService) {
+  public MovieController(PeliculaService peliculaService) {
     this.peliculaService = peliculaService;
   }
 
