@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PersonajeDTO {
+public class CharacterDTO {
   private Long id;
 
   @NotBlank(message = "Imagen es requerido")

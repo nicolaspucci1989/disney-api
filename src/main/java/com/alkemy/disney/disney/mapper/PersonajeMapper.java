@@ -1,7 +1,7 @@
 package com.alkemy.disney.disney.mapper;
 
 import com.alkemy.disney.disney.dto.CharacterBasicDTO;
-import com.alkemy.disney.disney.dto.PersonajeDTO;
+import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.entity.Personaje;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Component
 public class PersonajeMapper {
 
-  public Personaje personajeDTO2Entity(PersonajeDTO dto) {
+  public Personaje personajeDTO2Entity(CharacterDTO dto) {
     Personaje entity = new Personaje();
     entity.setImagen(dto.getImagen());
     entity.setNombre(dto.getNombre());
@@ -23,8 +23,8 @@ public class PersonajeMapper {
     return entity;
   }
 
-  public PersonajeDTO personajeEntity2DTO(Personaje entity) {
-    PersonajeDTO dto = new PersonajeDTO();
+  public CharacterDTO personajeEntity2DTO(Personaje entity) {
+    CharacterDTO dto = new CharacterDTO();
     dto.setId(entity.getId());
     dto.setImagen(entity.getImagen());
     dto.setNombre(entity.getNombre());
@@ -34,12 +34,12 @@ public class PersonajeMapper {
     return dto;
   }
 
-  public Set<Personaje> personajeDTOList2Entity(List<PersonajeDTO> dtos) {
+  public Set<Personaje> personajeDTOList2Entity(List<CharacterDTO> dtos) {
     return dtos.stream()
         .map(this::personajeDTO2Entity).collect(Collectors.toSet());
   }
 
-  public List<PersonajeDTO> personajeEntitySet2DTOList(Collection<Personaje> entities) {
+  public List<CharacterDTO> personajeEntitySet2DTOList(Collection<Personaje> entities) {
     return entities.stream()
         .map(this::personajeEntity2DTO)
         .collect(Collectors.toList());
@@ -56,11 +56,11 @@ public class PersonajeMapper {
         .collect(Collectors.toList());
   }
 
-  public void personajeEntityRefreshValues(Personaje entity, PersonajeDTO personajeDTO) {
-    entity.setHistoria(personajeDTO.getHistoria());
-    entity.setNombre(personajeDTO.getNombre());
-    entity.setImagen(personajeDTO.getImagen());
-    entity.setPeso(personajeDTO.getPeso());
-    entity.setEdad(personajeDTO.getEdad());
+  public void personajeEntityRefreshValues(Personaje entity, CharacterDTO characterDTO) {
+    entity.setHistoria(characterDTO.getHistoria());
+    entity.setNombre(characterDTO.getNombre());
+    entity.setImagen(characterDTO.getImagen());
+    entity.setPeso(characterDTO.getPeso());
+    entity.setEdad(characterDTO.getEdad());
   }
 }

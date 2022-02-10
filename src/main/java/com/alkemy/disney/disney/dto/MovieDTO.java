@@ -29,7 +29,7 @@ public class MovieDTO {
   @Range(max = 5, message = "Rango no valido")
   private Integer calificacion;
 
-  private List<PersonajeDTO> personajes;
+  private List<CharacterDTO> personajes;
 
   @NotNull(message = "Genero es requerido")
   private Long generoId;

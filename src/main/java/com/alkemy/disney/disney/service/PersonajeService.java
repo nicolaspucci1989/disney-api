@@ -1,19 +1,19 @@
 package com.alkemy.disney.disney.service;
 
 import com.alkemy.disney.disney.dto.CharacterBasicDTO;
-import com.alkemy.disney.disney.dto.PersonajeDTO;
+import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.entity.Personaje;
 
 import java.util.List;
 
 public interface PersonajeService {
-  PersonajeDTO save(PersonajeDTO dto);
+  CharacterDTO save(CharacterDTO dto);
 
   List<CharacterBasicDTO> getAll(String name, Integer age, List<Long> idMovies);
 
-  PersonajeDTO getDetailsById(Long id);
+  CharacterDTO getDetailsById(Long id);
 
-  PersonajeDTO update(Long id, PersonajeDTO personaje);
+  CharacterDTO update(Long id, CharacterDTO personaje);
 
   void delete(Long id);
 

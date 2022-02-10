@@ -1,7 +1,7 @@
 package com.alkemy.disney.disney.controller;
 
 import com.alkemy.disney.disney.dto.CharacterBasicDTO;
-import com.alkemy.disney.disney.dto.PersonajeDTO;
+import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.service.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,20 +33,20 @@ public class CharacterController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<PersonajeDTO> getDetailsById(@PathVariable Long id) {
-    PersonajeDTO personaje = personajeService.getDetailsById(id);
+  public ResponseEntity<CharacterDTO> getDetailsById(@PathVariable Long id) {
+    CharacterDTO personaje = personajeService.getDetailsById(id);
     return ResponseEntity.ok(personaje);
   }
 
   @PostMapping
-  public ResponseEntity<PersonajeDTO> save(@Valid @RequestBody PersonajeDTO personaje) {
-    PersonajeDTO personajeGuardado = personajeService.save(personaje);
+  public ResponseEntity<CharacterDTO> save(@Valid @RequestBody CharacterDTO personaje) {
+    CharacterDTO personajeGuardado = personajeService.save(personaje);
     return ResponseEntity.status(HttpStatus.CREATED).body(personajeGuardado);
   }
 
   @PutMapping("{id}")
-  public ResponseEntity<PersonajeDTO> update(@PathVariable Long id, @Valid @RequestBody PersonajeDTO personaje) {
-    PersonajeDTO res = this.personajeService.update(id, personaje);
+  public ResponseEntity<CharacterDTO> update(@PathVariable Long id, @Valid @RequestBody CharacterDTO personaje) {
+    CharacterDTO res = this.personajeService.update(id, personaje);
     return ResponseEntity.ok().body(res);
   }
 

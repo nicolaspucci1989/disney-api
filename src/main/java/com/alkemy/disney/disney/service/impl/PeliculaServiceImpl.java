@@ -3,7 +3,7 @@ package com.alkemy.disney.disney.service.impl;
 import com.alkemy.disney.disney.dto.MovieBasicDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.dto.MovieFilterDTO;
-import com.alkemy.disney.disney.dto.PersonajeDTO;
+import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.entity.Pelicula;
 import com.alkemy.disney.disney.entity.Personaje;
 import com.alkemy.disney.disney.exception.ParamNotFound;
@@ -95,8 +95,8 @@ public class PeliculaServiceImpl implements PeliculaService {
 
   private MovieDTO getPeliculaDetailsDTO(Pelicula pelicula) {
     MovieDTO movieDTO = this.peliculaMapper.peliculaEntity2DTO(pelicula);
-    List<PersonajeDTO> personajeDTOS = this.personajeMapper.personajeEntitySet2DTOList(pelicula.getPersonajes());
-    movieDTO.setPersonajes(personajeDTOS);
+    List<CharacterDTO> characterDTOS = this.personajeMapper.personajeEntitySet2DTOList(pelicula.getPersonajes());
+    movieDTO.setPersonajes(characterDTOS);
     return movieDTO;
   }
 }
