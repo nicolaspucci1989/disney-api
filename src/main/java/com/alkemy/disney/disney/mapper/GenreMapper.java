@@ -5,7 +5,7 @@ import com.alkemy.disney.disney.entity.Genre;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GeneroMapper {
+public class GenreMapper {
   public Genre generoDTO2Entity(GenreDTO dto) {
     Genre entity = new Genre();
     entity.setImagen(dto.getImagen());
