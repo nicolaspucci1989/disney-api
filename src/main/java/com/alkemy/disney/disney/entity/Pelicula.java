@@ -45,7 +45,7 @@ public class Pelicula {
   // TODO: ver cascade
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "genero_id", insertable = false, updatable = false)
-  private Genero genero;
+  private Genre genre;
 
   // TODO: ver nullable
   @Column(name = "genero_id", nullable = false)
