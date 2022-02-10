@@ -27,5 +27,5 @@ public class PersonajeDTO {
   @NotBlank(message = "Historia es requerido")
   private String historia;
 
-  private List<PeliculaDTO> peliculas;
+  private List<MovieDTO> peliculas;
 }

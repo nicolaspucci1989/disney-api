@@ -1,7 +1,7 @@
 package com.alkemy.disney.disney.service.impl;
 
 import com.alkemy.disney.disney.dto.MovieBasicDTO;
-import com.alkemy.disney.disney.dto.PeliculaDTO;
+import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.dto.PeliculaFilterDTO;
 import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.entity.Pelicula;
@@ -38,7 +38,7 @@ public class PeliculaServiceImpl implements PeliculaService {
   }
 
   @Override
-  public PeliculaDTO save(PeliculaDTO dto) {
+  public MovieDTO save(MovieDTO dto) {
     Pelicula pelicula = peliculaMapper.peliculaDTO2Entity(dto);
     Set<Personaje> personajes = personajeMapper.personajeDTOList2Entity(dto.getPersonajes());
     pelicula.setPersonajes(personajes);
@@ -55,7 +55,7 @@ public class PeliculaServiceImpl implements PeliculaService {
   }
 
   @Override
-  public PeliculaDTO getDetailsById(Long id) {
+  public MovieDTO getDetailsById(Long id) {
     return this.peliculaRepository.findById(id)
         .map(this::getPeliculaDetailsDTO)
         .orElseThrow(() -> new ParamNotFound("Id de pelicula no valido"));
@@ -83,20 +83,20 @@ public class PeliculaServiceImpl implements PeliculaService {
   }
 
   @Override
-  public PeliculaDTO update(Long id, PeliculaDTO peliculaDTO) {
+  public MovieDTO update(Long id, MovieDTO movieDTO) {
     Optional<Pelicula> entity = peliculaRepository.findById(id);
     if (entity.isEmpty()) {
       throw new ParamNotFound("Id de presonaje no valido");
     }
-    this.peliculaMapper.peliculaEntityRefreshValues(entity.get(), peliculaDTO);
+    this.peliculaMapper.peliculaEntityRefreshValues(entity.get(), movieDTO);
     Pelicula peliculaSaved = this.peliculaRepository.save(entity.get());
     return peliculaMapper.peliculaEntity2DTO(peliculaSaved);
   }
 
-  private PeliculaDTO getPeliculaDetailsDTO(Pelicula pelicula) {
-    PeliculaDTO peliculaDTO = this.peliculaMapper.peliculaEntity2DTO(pelicula);
+  private MovieDTO getPeliculaDetailsDTO(Pelicula pelicula) {
+    MovieDTO movieDTO = this.peliculaMapper.peliculaEntity2DTO(pelicula);
     List<PersonajeDTO> personajeDTOS = this.personajeMapper.personajeEntitySet2DTOList(pelicula.getPersonajes());
-    peliculaDTO.setPersonajes(personajeDTOS);
-    return peliculaDTO;
+    movieDTO.setPersonajes(personajeDTOS);
+    return movieDTO;
   }
 }

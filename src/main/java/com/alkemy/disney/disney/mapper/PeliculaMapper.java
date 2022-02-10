@@ -1,7 +1,7 @@
 package com.alkemy.disney.disney.mapper;
 
 import com.alkemy.disney.disney.dto.MovieBasicDTO;
-import com.alkemy.disney.disney.dto.PeliculaDTO;
+import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.entity.Pelicula;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class PeliculaMapper {
 
-  public Pelicula peliculaDTO2Entity(PeliculaDTO dto) {
+  public Pelicula peliculaDTO2Entity(MovieDTO dto) {
     Pelicula entity = new Pelicula();
     entity.setImagen(dto.getImagen());
     entity.setTitulo(dto.getTitulo());
@@ -22,8 +22,8 @@ public class PeliculaMapper {
     return entity;
   }
 
-  public PeliculaDTO peliculaEntity2DTO(Pelicula entity) {
-    PeliculaDTO dto = new PeliculaDTO();
+  public MovieDTO peliculaEntity2DTO(Pelicula entity) {
+    MovieDTO dto = new MovieDTO();
     dto.setFechaDeCreacion(entity.getFechaDeCreacion());
     dto.setId(entity.getId());
     dto.setImagen(entity.getImagen());
@@ -34,7 +34,7 @@ public class PeliculaMapper {
     return dto;
   }
 
-  public List<PeliculaDTO> peliculaEntityList2DTOList(Set<Pelicula> entities) {
+  public List<MovieDTO> peliculaEntityList2DTOList(Set<Pelicula> entities) {
     return entities.stream().map(this::peliculaEntity2DTO).collect(Collectors.toList());
   }
 
@@ -49,11 +49,11 @@ public class PeliculaMapper {
         .collect(Collectors.toList());
   }
 
-  public void peliculaEntityRefreshValues(Pelicula entity, PeliculaDTO peliculaDTO) {
-    entity.setImagen(peliculaDTO.getImagen());
-    entity.setTitulo(peliculaDTO.getTitulo());
-    entity.setFechaDeCreacion(peliculaDTO.getFechaDeCreacion());
-    entity.setCalificacion(peliculaDTO.getCalificacion());
+  public void peliculaEntityRefreshValues(Pelicula entity, MovieDTO movieDTO) {
+    entity.setImagen(movieDTO.getImagen());
+    entity.setTitulo(movieDTO.getTitulo());
+    entity.setFechaDeCreacion(movieDTO.getFechaDeCreacion());
+    entity.setCalificacion(movieDTO.getCalificacion());
     entity.setGeneroId(entity.getGeneroId());
   }
 }

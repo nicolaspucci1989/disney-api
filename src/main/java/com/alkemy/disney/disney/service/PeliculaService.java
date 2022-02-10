@@ -1,16 +1,16 @@
 package com.alkemy.disney.disney.service;
 
 import com.alkemy.disney.disney.dto.MovieBasicDTO;
-import com.alkemy.disney.disney.dto.PeliculaDTO;
+import com.alkemy.disney.disney.dto.MovieDTO;
 
 import java.util.List;
 
 public interface PeliculaService {
-  PeliculaDTO save(PeliculaDTO dto);
+  MovieDTO save(MovieDTO dto);
 
   List<MovieBasicDTO> getAll(String name, Long idGenre, String order);
 
-  PeliculaDTO getDetailsById(Long id);
+  MovieDTO getDetailsById(Long id);
 
   void delete(Long id);
 
@@ -18,5 +18,5 @@ public interface PeliculaService {
 
   void removePersonaje(Long id, Long idPersonaje);
 
-  PeliculaDTO update(Long id, PeliculaDTO pelicula);
+  MovieDTO update(Long id, MovieDTO pelicula);
 }

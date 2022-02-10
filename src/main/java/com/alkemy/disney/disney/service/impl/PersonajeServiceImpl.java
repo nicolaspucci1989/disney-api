@@ -1,6 +1,6 @@
 package com.alkemy.disney.disney.service.impl;
 
-import com.alkemy.disney.disney.dto.PeliculaDTO;
+import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.dto.PersonajeBasicDTO;
 import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.dto.PersonajeFilterDTO;
@@ -77,8 +77,8 @@ public class PersonajeServiceImpl implements PersonajeService {
 
   private PersonajeDTO getPersonajePersonajeDTOFunction(Personaje personajeEntity) {
     PersonajeDTO personajeDTO = this.personajeMapper.personajeEntity2DTO(personajeEntity);
-    List<PeliculaDTO> peliculaDTOS = peliculaMapper.peliculaEntityList2DTOList(personajeEntity.getPeliculas());
-    personajeDTO.setPeliculas(peliculaDTOS);
+    List<MovieDTO> movieDTOS = peliculaMapper.peliculaEntityList2DTOList(personajeEntity.getPeliculas());
+    personajeDTO.setPeliculas(movieDTOS);
     return personajeDTO;
   }
 

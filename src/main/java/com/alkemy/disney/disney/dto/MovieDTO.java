@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PeliculaDTO {
+public class MovieDTO {
   private Long id;
 
   @NotBlank(message = "Imagen es requerido")

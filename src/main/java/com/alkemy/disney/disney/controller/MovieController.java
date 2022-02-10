@@ -1,7 +1,7 @@
 package com.alkemy.disney.disney.controller;
 
 import com.alkemy.disney.disney.dto.MovieBasicDTO;
-import com.alkemy.disney.disney.dto.PeliculaDTO;
+import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,20 +33,20 @@ public class MovieController {
   }
 
   @GetMapping("{id}")
-  public ResponseEntity<PeliculaDTO> getDetailsById(@PathVariable Long id) {
-    PeliculaDTO dto = peliculaService.getDetailsById(id);
+  public ResponseEntity<MovieDTO> getDetailsById(@PathVariable Long id) {
+    MovieDTO dto = peliculaService.getDetailsById(id);
     return ResponseEntity.ok(dto);
   }
 
   @PostMapping
-  public ResponseEntity<PeliculaDTO> save(@Valid @RequestBody PeliculaDTO pelicula) {
-    PeliculaDTO peliculaGuardada = peliculaService.save(pelicula);
+  public ResponseEntity<MovieDTO> save(@Valid @RequestBody MovieDTO pelicula) {
+    MovieDTO peliculaGuardada = peliculaService.save(pelicula);
     return ResponseEntity.status(HttpStatus.CREATED).body(peliculaGuardada);
   }
 
   @PutMapping("{id}")
-  public ResponseEntity<PeliculaDTO> update(@PathVariable Long id, @Valid @RequestBody PeliculaDTO pelicula) {
-    PeliculaDTO res = this.peliculaService.update(id, pelicula);
+  public ResponseEntity<MovieDTO> update(@PathVariable Long id, @Valid @RequestBody MovieDTO pelicula) {
+    MovieDTO res = this.peliculaService.update(id, pelicula);
     return ResponseEntity.ok().body(res);
   }
 
