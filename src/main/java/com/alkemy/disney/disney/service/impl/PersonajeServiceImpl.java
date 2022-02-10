@@ -3,7 +3,7 @@ package com.alkemy.disney.disney.service.impl;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.dto.CharacterBasicDTO;
 import com.alkemy.disney.disney.dto.CharacterDTO;
-import com.alkemy.disney.disney.dto.PersonajeFilterDTO;
+import com.alkemy.disney.disney.dto.CharacterFilterDTO;
 import com.alkemy.disney.disney.entity.Personaje;
 import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.PeliculaMapper;
@@ -41,8 +41,8 @@ public class PersonajeServiceImpl implements PersonajeService {
 
   @Override
   public List<CharacterBasicDTO> getAll(String name, Integer age, List<Long> idMovies) {
-    PersonajeFilterDTO personajeFilterDTO = new PersonajeFilterDTO(name, age, idMovies);
-    Specification<Personaje> spec = PersonajeSpecification.getByFilters(personajeFilterDTO);
+    CharacterFilterDTO characterFilterDTO = new CharacterFilterDTO(name, age, idMovies);
+    Specification<Personaje> spec = PersonajeSpecification.getByFilters(characterFilterDTO);
     List<Personaje> entities = this.personajeRepository.findAll(spec);
     return personajeMapper.personajeEntityList2BasicDTOList(entities);
   }

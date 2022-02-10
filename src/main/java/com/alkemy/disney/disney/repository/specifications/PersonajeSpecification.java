@@ -1,6 +1,6 @@
 package com.alkemy.disney.disney.repository.specifications;
 
-import com.alkemy.disney.disney.dto.PersonajeFilterDTO;
+import com.alkemy.disney.disney.dto.CharacterFilterDTO;
 import com.alkemy.disney.disney.entity.Pelicula;
 import com.alkemy.disney.disney.entity.Personaje;
 import org.springframework.data.jpa.domain.Specification;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Component
 public class PersonajeSpecification {
-  public static Specification<Personaje> getByFilters(PersonajeFilterDTO filterDTO) {
+  public static Specification<Personaje> getByFilters(CharacterFilterDTO filterDTO) {
 
     return (root, criteriaQuery, criteriaBuilder) -> {
       List<Predicate> predicates = new ArrayList<>();
