@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class PersonajeSpecification {
+public class CharacterSpecification {
   public static Specification<Personaje> getByFilters(CharacterFilterDTO filterDTO) {
 
     return (root, criteriaQuery, criteriaBuilder) -> {

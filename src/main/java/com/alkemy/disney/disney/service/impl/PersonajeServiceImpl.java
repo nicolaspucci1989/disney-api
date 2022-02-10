@@ -9,7 +9,7 @@ import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.MovieMapper;
 import com.alkemy.disney.disney.mapper.CharacterMapper;
 import com.alkemy.disney.disney.repository.PersonajeRepository;
-import com.alkemy.disney.disney.repository.specifications.PersonajeSpecification;
+import com.alkemy.disney.disney.repository.specifications.CharacterSpecification;
 import com.alkemy.disney.disney.service.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -42,7 +42,7 @@ public class PersonajeServiceImpl implements PersonajeService {
   @Override
   public List<CharacterBasicDTO> getAll(String name, Integer age, List<Long> idMovies) {
     CharacterFilterDTO characterFilterDTO = new CharacterFilterDTO(name, age, idMovies);
-    Specification<Personaje> spec = PersonajeSpecification.getByFilters(characterFilterDTO);
+    Specification<Personaje> spec = CharacterSpecification.getByFilters(characterFilterDTO);
     List<Personaje> entities = this.personajeRepository.findAll(spec);
     return characterMapper.personajeEntityList2BasicDTOList(entities);
   }
