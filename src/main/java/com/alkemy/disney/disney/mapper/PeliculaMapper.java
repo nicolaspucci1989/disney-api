@@ -1,6 +1,6 @@
 package com.alkemy.disney.disney.mapper;
 
-import com.alkemy.disney.disney.dto.PeliculaBasicDTO;
+import com.alkemy.disney.disney.dto.MovieBasicDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
 import com.alkemy.disney.disney.entity.Pelicula;
 import org.springframework.stereotype.Component;
@@ -38,9 +38,9 @@ public class PeliculaMapper {
     return entities.stream().map(this::peliculaEntity2DTO).collect(Collectors.toList());
   }
 
-  public List<PeliculaBasicDTO> pelicualEntityList2BasicDTOList(List<Pelicula> entities) {
+  public List<MovieBasicDTO> pelicualEntityList2BasicDTOList(List<Pelicula> entities) {
     return entities.stream().map(e ->
-            PeliculaBasicDTO.builder()
+            MovieBasicDTO.builder()
                 .imagen(e.getImagen())
                 .titulo(e.getTitulo())
                 .fechaDeCreacion(e.getFechaDeCreacion())

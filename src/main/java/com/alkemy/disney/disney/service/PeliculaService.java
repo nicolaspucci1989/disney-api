@@ -1,6 +1,6 @@
 package com.alkemy.disney.disney.service;
 
-import com.alkemy.disney.disney.dto.PeliculaBasicDTO;
+import com.alkemy.disney.disney.dto.MovieBasicDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
 
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 public interface PeliculaService {
   PeliculaDTO save(PeliculaDTO dto);
 
-  List<PeliculaBasicDTO> getAll(String name, Long idGenre, String order);
+  List<MovieBasicDTO> getAll(String name, Long idGenre, String order);
 
   PeliculaDTO getDetailsById(Long id);
 
