@@ -1,6 +1,6 @@
 package com.alkemy.disney.disney.mapper;
 
-import com.alkemy.disney.disney.dto.PersonajeBasicDTO;
+import com.alkemy.disney.disney.dto.CharacterBasicDTO;
 import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.entity.Personaje;
 import org.springframework.stereotype.Component;
@@ -45,9 +45,9 @@ public class PersonajeMapper {
         .collect(Collectors.toList());
   }
 
-  public List<PersonajeBasicDTO> personajeEntityList2BasicDTOList(Collection<Personaje> entities) {
+  public List<CharacterBasicDTO> personajeEntityList2BasicDTOList(Collection<Personaje> entities) {
     return entities.stream()
-        .map(e -> PersonajeBasicDTO
+        .map(e -> CharacterBasicDTO
             .builder()
             .imagen(e.getImagen())
             .nombre(e.getNombre())

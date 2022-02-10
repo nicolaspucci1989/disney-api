@@ -1,6 +1,6 @@
 package com.alkemy.disney.disney.controller;
 
-import com.alkemy.disney.disney.dto.PersonajeBasicDTO;
+import com.alkemy.disney.disney.dto.CharacterBasicDTO;
 import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.service.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,12 @@ public class CharacterController {
   }
 
   @GetMapping
-  public ResponseEntity<List<PersonajeBasicDTO>> getAll(
+  public ResponseEntity<List<CharacterBasicDTO>> getAll(
       @RequestParam(required = false) String name,
       @RequestParam(required = false) Integer age,
       @RequestParam(required = false) List<Long> movies
   ) {
-    List<PersonajeBasicDTO> personajes = this.personajeService.getAll(name, age, movies);
+    List<CharacterBasicDTO> personajes = this.personajeService.getAll(name, age, movies);
     return ResponseEntity.ok(personajes);
   }
 
