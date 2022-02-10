@@ -2,10 +2,7 @@ package com.alkemy.disney.disney.mapper;
 
 import com.alkemy.disney.disney.dto.PeliculaBasicDTO;
 import com.alkemy.disney.disney.dto.PeliculaDTO;
-import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.entity.Pelicula;
-import com.alkemy.disney.disney.entity.Personaje;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,9 +12,6 @@ import java.util.stream.Collectors;
 @Component
 public class PeliculaMapper {
 
-  @Autowired
-  private PersonajeMapper personajeMapper;
-
   public Pelicula peliculaDTO2Entity(PeliculaDTO dto) {
     Pelicula entity = new Pelicula();
     entity.setImagen(dto.getImagen());
@@ -25,13 +19,10 @@ public class PeliculaMapper {
     entity.setCalificacion(dto.getCalificacion());
     entity.setFechaDeCreacion(dto.getFechaDeCreacion());
     entity.setGeneroId(dto.getGeneroId());
-    // personajes
-    Set<Personaje> personajes = this.personajeMapper.personajeDTOList2Entity(dto.getPersonajes());
-    entity.setPersonajes(personajes);
     return entity;
   }
 
-  public PeliculaDTO peliculaEntity2DTO(Pelicula entity, boolean loadPersonajes) {
+  public PeliculaDTO peliculaEntity2DTO(Pelicula entity) {
     PeliculaDTO dto = new PeliculaDTO();
     dto.setFechaDeCreacion(entity.getFechaDeCreacion());
     dto.setId(entity.getId());
@@ -40,15 +31,11 @@ public class PeliculaMapper {
     dto.setFechaDeCreacion(entity.getFechaDeCreacion());
     dto.setCalificacion(entity.getCalificacion());
     dto.setGeneroId(entity.getGeneroId());
-    if (loadPersonajes) {
-      List<PersonajeDTO> personajeDTOS = this.personajeMapper.personajeEntitySet2DTOList(entity.getPersonajes(), false);
-      dto.setPersonajes(personajeDTOS);
-    }
     return dto;
   }
 
-  public List<PeliculaDTO> peliculaEntityList2DTOList(Set<Pelicula> entities, boolean loadPersonajes) {
-    return entities.stream().map(pelicula -> peliculaEntity2DTO(pelicula, loadPersonajes)).collect(Collectors.toList());
+  public List<PeliculaDTO> peliculaEntityList2DTOList(Set<Pelicula> entities) {
+    return entities.stream().map(this::peliculaEntity2DTO).collect(Collectors.toList());
   }
 
   public List<PeliculaBasicDTO> pelicualEntityList2BasicDTOList(List<Pelicula> entities) {
