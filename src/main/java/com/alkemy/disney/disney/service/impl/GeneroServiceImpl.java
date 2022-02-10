@@ -1,6 +1,6 @@
 package com.alkemy.disney.disney.service.impl;
 
-import com.alkemy.disney.disney.dto.GeneroDTO;
+import com.alkemy.disney.disney.dto.GenreDTO;
 import com.alkemy.disney.disney.entity.Genero;
 import com.alkemy.disney.disney.mapper.GeneroMapper;
 import com.alkemy.disney.disney.repository.GeneroRepository;
@@ -20,7 +20,7 @@ public class GeneroServiceImpl implements GeneroService {
     this.generoRepository = generoRepository;
   }
 
-  public GeneroDTO save(GeneroDTO dto) {
+  public GenreDTO save(GenreDTO dto) {
     Genero genero = generoMapper.generoDTO2Entity(dto);
     Genero entitySave = this.generoRepository.save(genero);
     return this.generoMapper.generoEntity2DTO(entitySave);

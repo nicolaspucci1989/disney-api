@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 @Setter
 @Getter
-public class GeneroDTO {
+public class GenreDTO {
   private Long id;
 
   @NotBlank(message = "Nombre es requerido")
