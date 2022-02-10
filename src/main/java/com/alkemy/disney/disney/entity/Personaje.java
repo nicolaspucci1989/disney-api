@@ -30,7 +30,7 @@ public class Personaje {
   private String historia;
 
   @ManyToMany(mappedBy = "personajes", cascade = CascadeType.ALL)
-  private Set<Pelicula> peliculas = new HashSet<>();
+  private Set<Movie> movies = new HashSet<>();
 
   private boolean deleted = Boolean.FALSE;
 

@@ -17,7 +17,7 @@ import java.util.Set;
 @Setter
 @SQLDelete(sql = "UPDATE pelicula SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class Pelicula {
+public class Movie {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

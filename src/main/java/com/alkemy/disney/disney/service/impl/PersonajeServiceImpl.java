@@ -77,7 +77,7 @@ public class PersonajeServiceImpl implements PersonajeService {
 
   private CharacterDTO getPersonajePersonajeDTOFunction(Personaje personajeEntity) {
     CharacterDTO characterDTO = this.personajeMapper.personajeEntity2DTO(personajeEntity);
-    List<MovieDTO> movieDTOS = peliculaMapper.peliculaEntityList2DTOList(personajeEntity.getPeliculas());
+    List<MovieDTO> movieDTOS = peliculaMapper.peliculaEntityList2DTOList(personajeEntity.getMovies());
     characterDTO.setPeliculas(movieDTOS);
     return characterDTO;
   }

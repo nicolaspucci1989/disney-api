@@ -4,7 +4,7 @@ import com.alkemy.disney.disney.dto.MovieBasicDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.dto.MovieFilterDTO;
 import com.alkemy.disney.disney.dto.CharacterDTO;
-import com.alkemy.disney.disney.entity.Pelicula;
+import com.alkemy.disney.disney.entity.Movie;
 import com.alkemy.disney.disney.entity.Personaje;
 import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.PeliculaMapper;
@@ -39,18 +39,18 @@ public class PeliculaServiceImpl implements PeliculaService {
 
   @Override
   public MovieDTO save(MovieDTO dto) {
-    Pelicula pelicula = peliculaMapper.peliculaDTO2Entity(dto);
+    Movie movie = peliculaMapper.peliculaDTO2Entity(dto);
     Set<Personaje> personajes = personajeMapper.personajeDTOList2Entity(dto.getPersonajes());
-    pelicula.setPersonajes(personajes);
-    Pelicula entitySave = this.peliculaRepository.save(pelicula);
+    movie.setPersonajes(personajes);
+    Movie entitySave = this.peliculaRepository.save(movie);
     return getPeliculaDetailsDTO(entitySave);
   }
 
   @Override
   public List<MovieBasicDTO> getAll(String name, Long idGenre, String order) {
     MovieFilterDTO movieFilterDTO = new MovieFilterDTO(name, idGenre, order);
-    Specification<Pelicula> spec = PeliculaSpecification.getByFilters(movieFilterDTO);
-    List<Pelicula> all = peliculaRepository.findAll(spec);
+    Specification<Movie> spec = PeliculaSpecification.getByFilters(movieFilterDTO);
+    List<Movie> all = peliculaRepository.findAll(spec);
     return peliculaMapper.pelicualEntityList2BasicDTOList(all);
   }
 
@@ -68,7 +68,7 @@ public class PeliculaServiceImpl implements PeliculaService {
 
   @Override
   public void addPersonaje(Long id, Long idPersonaje) {
-    Pelicula entity = peliculaRepository.getById(id);
+    Movie entity = peliculaRepository.getById(id);
     Personaje personaje = personajeService.getById(idPersonaje);
     entity.addPersonaje(personaje);
     peliculaRepository.save(entity);
@@ -76,7 +76,7 @@ public class PeliculaServiceImpl implements PeliculaService {
 
   @Override
   public void removePersonaje(Long id, Long idPersonaje) {
-    Pelicula entity = peliculaRepository.getById(id);
+    Movie entity = peliculaRepository.getById(id);
     Personaje personaje = personajeService.getById(idPersonaje);
     entity.removePersonaje(personaje);
     peliculaRepository.save(entity);
@@ -84,18 +84,18 @@ public class PeliculaServiceImpl implements PeliculaService {
 
   @Override
   public MovieDTO update(Long id, MovieDTO movieDTO) {
-    Optional<Pelicula> entity = peliculaRepository.findById(id);
+    Optional<Movie> entity = peliculaRepository.findById(id);
     if (entity.isEmpty()) {
       throw new ParamNotFound("Id de presonaje no valido");
     }
     this.peliculaMapper.peliculaEntityRefreshValues(entity.get(), movieDTO);
-    Pelicula peliculaSaved = this.peliculaRepository.save(entity.get());
-    return peliculaMapper.peliculaEntity2DTO(peliculaSaved);
+    Movie movieSaved = this.peliculaRepository.save(entity.get());
+    return peliculaMapper.peliculaEntity2DTO(movieSaved);
   }
 
-  private MovieDTO getPeliculaDetailsDTO(Pelicula pelicula) {
-    MovieDTO movieDTO = this.peliculaMapper.peliculaEntity2DTO(pelicula);
-    List<CharacterDTO> characterDTOS = this.personajeMapper.personajeEntitySet2DTOList(pelicula.getPersonajes());
+  private MovieDTO getPeliculaDetailsDTO(Movie movie) {
+    MovieDTO movieDTO = this.peliculaMapper.peliculaEntity2DTO(movie);
+    List<CharacterDTO> characterDTOS = this.personajeMapper.personajeEntitySet2DTOList(movie.getPersonajes());
     movieDTO.setPersonajes(characterDTOS);
     return movieDTO;
   }
