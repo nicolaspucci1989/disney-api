@@ -20,7 +20,7 @@ public class Character {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String imagen;
+  private String image;
 
   private String nombre;
 

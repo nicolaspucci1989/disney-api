@@ -12,8 +12,8 @@ import java.util.List;
 public class CharacterDTO {
   private Long id;
 
-  @NotBlank(message = "Imagen es requerido")
-  private String imagen;
+  @NotBlank(message = "Image is required")
+  private String image;
 
   @NotBlank(message = "Nombre es requerido")
   private String nombre;

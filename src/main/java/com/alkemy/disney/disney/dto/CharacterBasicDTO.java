@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @Builder
 public class CharacterBasicDTO {
-  private String imagen;
+  private String image;
   private String nombre;
 }
