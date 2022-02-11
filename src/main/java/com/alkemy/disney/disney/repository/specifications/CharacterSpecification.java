@@ -1,6 +1,7 @@
 package com.alkemy.disney.disney.repository.specifications;
 
 import com.alkemy.disney.disney.dto.CharacterFilterDTO;
+import com.alkemy.disney.disney.entity.Character_;
 import com.alkemy.disney.disney.entity.Movie;
 import com.alkemy.disney.disney.entity.Character;
 import org.springframework.data.jpa.domain.Specification;
@@ -25,7 +26,7 @@ public class CharacterSpecification {
       if (StringUtils.hasLength(filterDTO.getName())) {
         predicates.add(
             criteriaBuilder.like(
-                criteriaBuilder.lower(root.get("name")),
+                criteriaBuilder.lower(root.get(Character_.NAME)),
                 "%" + filterDTO.getName().toLowerCase() + "%"
             )
         );
@@ -33,13 +34,13 @@ public class CharacterSpecification {
 
       if (filterDTO.getAge() != null) {
         predicates.add(
-            criteriaBuilder.equal(root.<Integer>get("age"), filterDTO.getAge())
+            criteriaBuilder.equal(root.<Integer>get(Character_.AGE), filterDTO.getAge())
         );
       }
 
       if (!CollectionUtils.isEmpty(filterDTO.getIdMovies())) {
-        Join<Movie, Character> join = root.join("movies", JoinType.INNER);
-        Expression<String> moviesId = join.get("id");
+        Join<Movie, Character> join = root.join(Character_.MOVIES, JoinType.INNER);
+        Expression<String> moviesId = join.get(Character_.ID);
         predicates.add(moviesId.in(filterDTO.getIdMovies()));
       }
 

@@ -2,6 +2,7 @@ package com.alkemy.disney.disney.repository.specifications;
 
 import com.alkemy.disney.disney.dto.MovieFilterDTO;
 import com.alkemy.disney.disney.entity.Movie;
+import com.alkemy.disney.disney.entity.Movie_;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -19,7 +20,7 @@ public class MovieSpecification {
       if (StringUtils.hasLength(filterDTO.getName())) {
         predicates.add(
             criteriaBuilder.like(
-                criteriaBuilder.lower(root.get("title")),
+                criteriaBuilder.lower(root.get(Movie_.TITLE)),
                 "%" + filterDTO.getName().toLowerCase() + "%"
             )
         );
@@ -27,13 +28,13 @@ public class MovieSpecification {
 
       if (filterDTO.getIdGenre() != null) {
         predicates.add(
-            criteriaBuilder.equal(root.<Long>get("genre"), filterDTO.getIdGenre())
+            criteriaBuilder.equal(root.<Long>get(Movie_.GENRE), filterDTO.getIdGenre())
         );
       }
 
       criteriaQuery.distinct(true);
 
-      String orderByField = "creationDate";
+      String orderByField = Movie_.CREATION_DATE;
       criteriaQuery.orderBy(
           filterDTO.isAsc() ?
               criteriaBuilder.asc(root.get(orderByField)) :
