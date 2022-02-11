@@ -18,7 +18,7 @@ public class MyUserService {
   public void checkIfUserExists(UserDTO dto) throws Exception {
     AppUser user = userRepository.findByUsername(dto.getUsername());
     if (user != null) {
-      throw new Exception("Ya existe un usuario con ese mail");
+      throw new Exception("User with that email already exists");
     }
   }
 
