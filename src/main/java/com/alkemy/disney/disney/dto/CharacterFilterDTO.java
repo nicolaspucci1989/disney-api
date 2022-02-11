@@ -11,6 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CharacterFilterDTO {
   private String name;
-  private Integer edad;
+  private Integer age;
   private List<Long> idMovies;
 }

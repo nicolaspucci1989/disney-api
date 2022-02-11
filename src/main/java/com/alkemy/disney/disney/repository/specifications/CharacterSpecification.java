@@ -25,15 +25,15 @@ public class CharacterSpecification {
       if (StringUtils.hasLength(filterDTO.getName())) {
         predicates.add(
             criteriaBuilder.like(
-                criteriaBuilder.lower(root.get("nombre")),
+                criteriaBuilder.lower(root.get("name")),
                 "%" + filterDTO.getName().toLowerCase() + "%"
             )
         );
       }
 
-      if (filterDTO.getEdad() != null) {
+      if (filterDTO.getAge() != null) {
         predicates.add(
-            criteriaBuilder.equal(root.<Integer>get("edad"), filterDTO.getEdad())
+            criteriaBuilder.equal(root.<Integer>get("age"), filterDTO.getAge())
         );
       }
 
