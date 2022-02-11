@@ -18,8 +18,8 @@ public class MovieDTO {
   @NotBlank(message = "Image is required")
   private String image;
 
-  @NotBlank(message = "Titulo es requerido")
-  private String titulo;
+  @NotBlank(message = "Title is required")
+  private String title;
 
   @NotNull(message = "Fecha es requerido")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")

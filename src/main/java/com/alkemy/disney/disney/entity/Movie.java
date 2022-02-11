@@ -23,7 +23,7 @@ public class Movie {
 
   private String image;
 
-  private String titulo;
+  private String title;
 
   @Column(name = "fecha_de_creacion")
   private LocalDate fechaDeCreacion;

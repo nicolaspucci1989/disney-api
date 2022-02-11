@@ -11,6 +11,6 @@ import java.time.LocalDate;
 @Builder
 public class MovieBasicDTO {
   private String image;
-  private String titulo;
+  private String title;
   private LocalDate fechaDeCreacion;
 }
