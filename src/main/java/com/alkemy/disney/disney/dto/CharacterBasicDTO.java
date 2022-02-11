@@ -9,5 +9,5 @@ import lombok.Setter;
 @Builder
 public class CharacterBasicDTO {
   private String image;
-  private String nombre;
+  private String name;
 }

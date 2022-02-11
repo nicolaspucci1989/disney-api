@@ -15,8 +15,8 @@ public class CharacterDTO {
   @NotBlank(message = "Image is required")
   private String image;
 
-  @NotBlank(message = "Nombre es requerido")
-  private String nombre;
+  @NotBlank(message = "Name is required")
+  private String name;
 
   @NotNull(message = "Edad es requerido")
   private Integer edad;

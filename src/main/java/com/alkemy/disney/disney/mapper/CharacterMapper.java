@@ -16,7 +16,7 @@ public class CharacterMapper {
   public Character personajeDTO2Entity(CharacterDTO dto) {
     Character entity = new Character();
     entity.setImage(dto.getImage());
-    entity.setNombre(dto.getNombre());
+    entity.setName(dto.getName());
     entity.setEdad(dto.getEdad());
     entity.setPeso(dto.getPeso());
     entity.setHistoria(dto.getHistoria());
@@ -27,7 +27,7 @@ public class CharacterMapper {
     CharacterDTO dto = new CharacterDTO();
     dto.setId(entity.getId());
     dto.setImage(entity.getImage());
-    dto.setNombre(entity.getNombre());
+    dto.setName(entity.getName());
     dto.setEdad(entity.getEdad());
     dto.setPeso(entity.getPeso());
     dto.setHistoria(entity.getHistoria());
@@ -50,7 +50,7 @@ public class CharacterMapper {
         .map(e -> CharacterBasicDTO
             .builder()
             .image(e.getImage())
-            .nombre(e.getNombre())
+            .name(e.getName())
             .build()
         )
         .collect(Collectors.toList());
@@ -58,7 +58,7 @@ public class CharacterMapper {
 
   public void personajeEntityRefreshValues(Character entity, CharacterDTO characterDTO) {
     entity.setHistoria(characterDTO.getHistoria());
-    entity.setNombre(characterDTO.getNombre());
+    entity.setName(characterDTO.getName());
     entity.setImage(characterDTO.getImage());
     entity.setPeso(characterDTO.getPeso());
     entity.setEdad(characterDTO.getEdad());

@@ -22,7 +22,7 @@ public class Character {
 
   private String image;
 
-  private String nombre;
+  private String name;
 
   private Integer edad;
 
