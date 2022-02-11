@@ -71,8 +71,8 @@ public class CharacterServiceImpl implements CharacterService {
   }
 
   @Override
-  public Character getById(Long idPersonaje) {
-    return this.characterRepository.getById(idPersonaje);
+  public Character getById(Long idCharacter) {
+    return this.characterRepository.getById(idCharacter);
   }
 
   private CharacterDTO getPersonajePersonajeDTOFunction(Character character) {
