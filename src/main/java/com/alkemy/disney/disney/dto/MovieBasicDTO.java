@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @Builder
 public class MovieBasicDTO {
-  private String imagen;
+  private String image;
   private String titulo;
   private LocalDate fechaDeCreacion;
 }
