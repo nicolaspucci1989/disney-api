@@ -21,8 +21,8 @@ public class CharacterDTO {
   @NotNull(message = "Age is required")
   private Integer age;
 
-  @NotNull(message = "Peso es requerido")
-  private Float peso;
+  @NotNull(message = "Weight is required")
+  private Float weight;
 
   @NotBlank(message = "History is required")
   private String history;

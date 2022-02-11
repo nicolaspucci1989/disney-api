@@ -26,7 +26,7 @@ public class Character {
 
   private Integer age;
 
-  private Float peso;
+  private Float weight;
 
   private String history;
 
