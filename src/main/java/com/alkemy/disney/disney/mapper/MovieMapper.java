@@ -17,18 +17,18 @@ public class MovieMapper {
     entity.setImage(dto.getImage());
     entity.setTitle(dto.getTitle());
     entity.setCalificacion(dto.getCalificacion());
-    entity.setFechaDeCreacion(dto.getFechaDeCreacion());
+    entity.setCreationDate(dto.getCreationDate());
     entity.setGenreId(dto.getGeneroId());
     return entity;
   }
 
   public MovieDTO peliculaEntity2DTO(Movie entity) {
     MovieDTO dto = new MovieDTO();
-    dto.setFechaDeCreacion(entity.getFechaDeCreacion());
+    dto.setCreationDate(entity.getCreationDate());
     dto.setId(entity.getId());
     dto.setImage(entity.getImage());
     dto.setTitle(entity.getTitle());
-    dto.setFechaDeCreacion(entity.getFechaDeCreacion());
+    dto.setCreationDate(entity.getCreationDate());
     dto.setCalificacion(entity.getCalificacion());
     dto.setGeneroId(entity.getGenreId());
     return dto;
@@ -43,7 +43,7 @@ public class MovieMapper {
             MovieBasicDTO.builder()
                 .image(e.getImage())
                 .title(e.getTitle())
-                .fechaDeCreacion(e.getFechaDeCreacion())
+                .creationDate(e.getCreationDate())
                 .build()
         )
         .collect(Collectors.toList());
@@ -52,7 +52,7 @@ public class MovieMapper {
   public void peliculaEntityRefreshValues(Movie entity, MovieDTO movieDTO) {
     entity.setImage(movieDTO.getImage());
     entity.setTitle(movieDTO.getTitle());
-    entity.setFechaDeCreacion(movieDTO.getFechaDeCreacion());
+    entity.setCreationDate(movieDTO.getCreationDate());
     entity.setCalificacion(movieDTO.getCalificacion());
     entity.setGenreId(entity.getGenreId());
   }

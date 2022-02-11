@@ -25,8 +25,8 @@ public class Movie {
 
   private String title;
 
-  @Column(name = "fecha_de_creacion")
-  private LocalDate fechaDeCreacion;
+  @Column(name = "creation_date")
+  private LocalDate creationDate;
 
   private Integer calificacion;
 

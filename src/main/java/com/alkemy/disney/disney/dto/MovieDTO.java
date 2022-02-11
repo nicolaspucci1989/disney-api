@@ -21,9 +21,9 @@ public class MovieDTO {
   @NotBlank(message = "Title is required")
   private String title;
 
-  @NotNull(message = "Fecha es requerido")
+  @NotNull(message = "Creation date is required")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-  private LocalDate fechaDeCreacion;
+  private LocalDate creationDate;
 
   @NotNull(message = "Rango es requerido")
   @Range(max = 5, message = "Rango no valido")
