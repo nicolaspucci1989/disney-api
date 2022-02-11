@@ -25,9 +25,9 @@ public class MovieDTO {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
   private LocalDate creationDate;
 
-  @NotNull(message = "Rango es requerido")
-  @Range(max = 5, message = "Rango no valido")
-  private Integer calificacion;
+  @NotNull(message = "Rating is required")
+  @Range(max = 5, message = "Non valid range")
+  private Integer rating;
 
   private List<CharacterDTO> personajes;
 

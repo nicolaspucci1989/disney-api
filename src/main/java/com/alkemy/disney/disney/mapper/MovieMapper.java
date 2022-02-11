@@ -16,7 +16,7 @@ public class MovieMapper {
     Movie entity = new Movie();
     entity.setImage(dto.getImage());
     entity.setTitle(dto.getTitle());
-    entity.setCalificacion(dto.getCalificacion());
+    entity.setRating(dto.getRating());
     entity.setCreationDate(dto.getCreationDate());
     entity.setGenreId(dto.getGeneroId());
     return entity;
@@ -29,7 +29,7 @@ public class MovieMapper {
     dto.setImage(entity.getImage());
     dto.setTitle(entity.getTitle());
     dto.setCreationDate(entity.getCreationDate());
-    dto.setCalificacion(entity.getCalificacion());
+    dto.setRating(entity.getRating());
     dto.setGeneroId(entity.getGenreId());
     return dto;
   }
@@ -53,7 +53,7 @@ public class MovieMapper {
     entity.setImage(movieDTO.getImage());
     entity.setTitle(movieDTO.getTitle());
     entity.setCreationDate(movieDTO.getCreationDate());
-    entity.setCalificacion(movieDTO.getCalificacion());
+    entity.setRating(movieDTO.getRating());
     entity.setGenreId(entity.getGenreId());
   }
 }

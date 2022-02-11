@@ -28,7 +28,7 @@ public class Movie {
   @Column(name = "creation_date")
   private LocalDate creationDate;
 
-  private Integer calificacion;
+  private Integer rating;
 
   @ManyToMany(
       cascade = {
