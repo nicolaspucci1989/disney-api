@@ -18,8 +18,8 @@ public class CharacterDTO {
   @NotBlank(message = "Name is required")
   private String name;
 
-  @NotNull(message = "Edad es requerido")
-  private Integer edad;
+  @NotNull(message = "Age is required")
+  private Integer age;
 
   @NotNull(message = "Peso es requerido")
   private Float peso;

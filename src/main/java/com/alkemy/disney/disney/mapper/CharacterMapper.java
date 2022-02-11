@@ -17,7 +17,7 @@ public class CharacterMapper {
     Character entity = new Character();
     entity.setImage(dto.getImage());
     entity.setName(dto.getName());
-    entity.setEdad(dto.getEdad());
+    entity.setAge(dto.getAge());
     entity.setPeso(dto.getPeso());
     entity.setHistoria(dto.getHistoria());
     return entity;
@@ -28,7 +28,7 @@ public class CharacterMapper {
     dto.setId(entity.getId());
     dto.setImage(entity.getImage());
     dto.setName(entity.getName());
-    dto.setEdad(entity.getEdad());
+    dto.setAge(entity.getAge());
     dto.setPeso(entity.getPeso());
     dto.setHistoria(entity.getHistoria());
     return dto;
@@ -61,6 +61,6 @@ public class CharacterMapper {
     entity.setName(characterDTO.getName());
     entity.setImage(characterDTO.getImage());
     entity.setPeso(characterDTO.getPeso());
-    entity.setEdad(characterDTO.getEdad());
+    entity.setAge(characterDTO.getAge());
   }
 }

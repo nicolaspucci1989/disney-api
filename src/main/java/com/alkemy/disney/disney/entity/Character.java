@@ -24,7 +24,7 @@ public class Character {
 
   private String name;
 
-  private Integer edad;
+  private Integer age;
 
   private Float peso;
 
