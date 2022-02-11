@@ -34,8 +34,8 @@ public class CharacterMapper {
     return dto;
   }
 
-  public Set<Character> characterDTOList2Entity(List<CharacterDTO> dtos) {
-    return dtos.stream()
+  public Set<Character> characterDTOList2Entity(List<CharacterDTO> DTOs) {
+    return DTOs.stream()
         .map(this::characterDTO2Entity).collect(Collectors.toSet());
   }
 
