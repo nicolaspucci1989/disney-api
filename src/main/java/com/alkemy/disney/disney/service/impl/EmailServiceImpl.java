@@ -37,10 +37,10 @@ public class EmailServiceImpl implements EmailService {
 
     Email fromEmail = new Email(emailSender);
     Email toEmail = new Email(to);
-    String subject = "Bienvendio";
+    String subject = "Welcome";
     Content content = new Content(
         "text/plain",
-        "La cuenta fue creada con exito"
+        "Account successfully created"
     );
     Mail mail = new Mail(fromEmail, subject, toEmail, content);
 
