@@ -34,9 +34,9 @@ public class CharacterServiceImpl implements CharacterService {
 
   @Override
   public CharacterDTO save(CharacterDTO dto) {
-    Character entity = characterMapper.personajeDTO2Entity(dto);
+    Character entity = characterMapper.characterDTO2Entity(dto);
     Character save = characterRepository.save(entity);
-    return characterMapper.personajeEntity2DTO(save);
+    return characterMapper.characterEntity2DTO(save);
   }
 
   @Override
@@ -44,7 +44,7 @@ public class CharacterServiceImpl implements CharacterService {
     CharacterFilterDTO characterFilterDTO = new CharacterFilterDTO(name, age, idMovies);
     Specification<Character> spec = CharacterSpecification.getByFilters(characterFilterDTO);
     List<Character> entities = this.characterRepository.findAll(spec);
-    return characterMapper.personajeEntityList2BasicDTOList(entities);
+    return characterMapper.characterEntityList2BasicDTOList(entities);
   }
 
   @Override
@@ -60,9 +60,9 @@ public class CharacterServiceImpl implements CharacterService {
     if (entity.isEmpty()) {
       throw new ParamNotFound("Id de presonaje no valido");
     }
-    this.characterMapper.personajeEntityRefreshValues(entity.get(), characterDTO);
+    this.characterMapper.characterEntityRefreshValues(entity.get(), characterDTO);
     Character characterSaved = this.characterRepository.save(entity.get());
-    return characterMapper.personajeEntity2DTO(characterSaved);
+    return characterMapper.characterEntity2DTO(characterSaved);
   }
 
   @Override
@@ -76,7 +76,7 @@ public class CharacterServiceImpl implements CharacterService {
   }
 
   private CharacterDTO getPersonajePersonajeDTOFunction(Character character) {
-    CharacterDTO characterDTO = this.characterMapper.personajeEntity2DTO(character);
+    CharacterDTO characterDTO = this.characterMapper.characterEntity2DTO(character);
     List<MovieDTO> movieDTOS = movieMapper.peliculaEntityList2DTOList(character.getMovies());
     characterDTO.setMovies(movieDTOS);
     return characterDTO;

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Component
 public class CharacterMapper {
 
-  public Character personajeDTO2Entity(CharacterDTO dto) {
+  public Character characterDTO2Entity(CharacterDTO dto) {
     Character entity = new Character();
     entity.setImage(dto.getImage());
     entity.setName(dto.getName());
@@ -23,7 +23,7 @@ public class CharacterMapper {
     return entity;
   }
 
-  public CharacterDTO personajeEntity2DTO(Character entity) {
+  public CharacterDTO characterEntity2DTO(Character entity) {
     CharacterDTO dto = new CharacterDTO();
     dto.setId(entity.getId());
     dto.setImage(entity.getImage());
@@ -34,18 +34,18 @@ public class CharacterMapper {
     return dto;
   }
 
-  public Set<Character> personajeDTOList2Entity(List<CharacterDTO> dtos) {
+  public Set<Character> characterDTOList2Entity(List<CharacterDTO> dtos) {
     return dtos.stream()
-        .map(this::personajeDTO2Entity).collect(Collectors.toSet());
+        .map(this::characterDTO2Entity).collect(Collectors.toSet());
   }
 
-  public List<CharacterDTO> personajeEntitySet2DTOList(Collection<Character> entities) {
+  public List<CharacterDTO> characterEntitySet2DTOList(Collection<Character> entities) {
     return entities.stream()
-        .map(this::personajeEntity2DTO)
+        .map(this::characterEntity2DTO)
         .collect(Collectors.toList());
   }
 
-  public List<CharacterBasicDTO> personajeEntityList2BasicDTOList(Collection<Character> entities) {
+  public List<CharacterBasicDTO> characterEntityList2BasicDTOList(Collection<Character> entities) {
     return entities.stream()
         .map(e -> CharacterBasicDTO
             .builder()
@@ -56,7 +56,7 @@ public class CharacterMapper {
         .collect(Collectors.toList());
   }
 
-  public void personajeEntityRefreshValues(Character entity, CharacterDTO characterDTO) {
+  public void characterEntityRefreshValues(Character entity, CharacterDTO characterDTO) {
     entity.setHistory(characterDTO.getHistory());
     entity.setName(characterDTO.getName());
     entity.setImage(characterDTO.getImage());
