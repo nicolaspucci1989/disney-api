@@ -58,13 +58,13 @@ public class MovieController {
 
   @PostMapping("{id}/character/{idPersonaje}")
   public ResponseEntity<Void> addPersonaje(@PathVariable Long id, @PathVariable Long idPersonaje) {
-    this.movieService.addPersonaje(id, idPersonaje);
+    this.movieService.addCharacter(id, idPersonaje);
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
   @DeleteMapping("{id}/character/{idPersonaje}")
   public ResponseEntity<Void> removePersonaje(@PathVariable Long id, @PathVariable Long idPersonaje) {
-    this.movieService.removePersonaje(id, idPersonaje);
+    this.movieService.removeCharacter(id, idPersonaje);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 

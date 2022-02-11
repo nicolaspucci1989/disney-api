@@ -14,9 +14,9 @@ public interface MovieService {
 
   void delete(Long id);
 
-  void addPersonaje(Long id, Long idPersonaje);
+  void addCharacter(Long id, Long idPersonaje);
 
-  void removePersonaje(Long id, Long idPersonaje);
+  void removeCharacter(Long id, Long idPersonaje);
 
   MovieDTO update(Long id, MovieDTO pelicula);
 }

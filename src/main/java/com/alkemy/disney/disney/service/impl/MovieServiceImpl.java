@@ -43,7 +43,7 @@ public class MovieServiceImpl implements MovieService {
     Set<Character> characters = characterMapper.characterDTOList2Entity(dto.getCharacters());
     movie.setCharacters(characters);
     Movie entitySave = this.movieRepository.save(movie);
-    return getPeliculaDetailsDTO(entitySave);
+    return getMovieDetailsDTO(entitySave);
   }
 
   @Override
@@ -57,7 +57,7 @@ public class MovieServiceImpl implements MovieService {
   @Override
   public MovieDTO getDetailsById(Long id) {
     return this.movieRepository.findById(id)
-        .map(this::getPeliculaDetailsDTO)
+        .map(this::getMovieDetailsDTO)
         .orElseThrow(() -> new ParamNotFound("Character id not valid"));
   }
 
@@ -67,17 +67,17 @@ public class MovieServiceImpl implements MovieService {
   }
 
   @Override
-  public void addPersonaje(Long id, Long idPersonaje) {
+  public void addCharacter(Long id, Long idCharacter) {
     Movie entity = movieRepository.getById(id);
-    Character character = characterService.getById(idPersonaje);
+    Character character = characterService.getById(idCharacter);
     entity.addCharacter(character);
     movieRepository.save(entity);
   }
 
   @Override
-  public void removePersonaje(Long id, Long idPersonaje) {
+  public void removeCharacter(Long id, Long idCharacter) {
     Movie entity = movieRepository.getById(id);
-    Character character = characterService.getById(idPersonaje);
+    Character character = characterService.getById(idCharacter);
     entity.removeCharacter(character);
     movieRepository.save(entity);
   }
@@ -93,7 +93,7 @@ public class MovieServiceImpl implements MovieService {
     return movieMapper.movieEntity2DTO(movieSaved);
   }
 
-  private MovieDTO getPeliculaDetailsDTO(Movie movie) {
+  private MovieDTO getMovieDetailsDTO(Movie movie) {
     MovieDTO movieDTO = this.movieMapper.movieEntity2DTO(movie);
     List<CharacterDTO> characterDTOS = this.characterMapper.characterEntitySet2DTOList(movie.getCharacters());
     movieDTO.setCharacters(characterDTOS);
