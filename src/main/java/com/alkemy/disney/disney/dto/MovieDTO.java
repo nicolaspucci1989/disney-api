@@ -31,6 +31,6 @@ public class MovieDTO {
 
   private List<CharacterDTO> characters;
 
-  @NotNull(message = "Genero es requerido")
-  private Long generoId;
+  @NotNull(message = "Genre is required")
+  private Long genreId;
 }
