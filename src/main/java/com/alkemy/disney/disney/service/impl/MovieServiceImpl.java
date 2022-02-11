@@ -39,7 +39,7 @@ public class MovieServiceImpl implements MovieService {
 
   @Override
   public MovieDTO save(MovieDTO dto) {
-    Movie movie = movieMapper.peliculaDTO2Entity(dto);
+    Movie movie = movieMapper.movieDTO2Entity(dto);
     Set<Character> characters = characterMapper.characterDTOList2Entity(dto.getCharacters());
     movie.setCharacters(characters);
     Movie entitySave = this.movieRepository.save(movie);
@@ -51,7 +51,7 @@ public class MovieServiceImpl implements MovieService {
     MovieFilterDTO movieFilterDTO = new MovieFilterDTO(name, idGenre, order);
     Specification<Movie> spec = MovieSpecification.getByFilters(movieFilterDTO);
     List<Movie> all = movieRepository.findAll(spec);
-    return movieMapper.pelicualEntityList2BasicDTOList(all);
+    return movieMapper.movieEntityList2BasicDTOList(all);
   }
 
   @Override
@@ -88,13 +88,13 @@ public class MovieServiceImpl implements MovieService {
     if (entity.isEmpty()) {
       throw new ParamNotFound("Id de presonaje no valido");
     }
-    this.movieMapper.peliculaEntityRefreshValues(entity.get(), movieDTO);
+    this.movieMapper.movieEntityRefreshValues(entity.get(), movieDTO);
     Movie movieSaved = this.movieRepository.save(entity.get());
-    return movieMapper.peliculaEntity2DTO(movieSaved);
+    return movieMapper.movieEntity2DTO(movieSaved);
   }
 
   private MovieDTO getPeliculaDetailsDTO(Movie movie) {
-    MovieDTO movieDTO = this.movieMapper.peliculaEntity2DTO(movie);
+    MovieDTO movieDTO = this.movieMapper.movieEntity2DTO(movie);
     List<CharacterDTO> characterDTOS = this.characterMapper.characterEntitySet2DTOList(movie.getCharacters());
     movieDTO.setCharacters(characterDTOS);
     return movieDTO;

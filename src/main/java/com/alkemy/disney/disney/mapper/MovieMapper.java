@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class MovieMapper {
 
-  public Movie peliculaDTO2Entity(MovieDTO dto) {
+  public Movie movieDTO2Entity(MovieDTO dto) {
     Movie entity = new Movie();
     entity.setImage(dto.getImage());
     entity.setTitle(dto.getTitle());
@@ -22,7 +22,7 @@ public class MovieMapper {
     return entity;
   }
 
-  public MovieDTO peliculaEntity2DTO(Movie entity) {
+  public MovieDTO movieEntity2DTO(Movie entity) {
     MovieDTO dto = new MovieDTO();
     dto.setCreationDate(entity.getCreationDate());
     dto.setId(entity.getId());
@@ -34,11 +34,11 @@ public class MovieMapper {
     return dto;
   }
 
-  public List<MovieDTO> peliculaEntityList2DTOList(Set<Movie> entities) {
-    return entities.stream().map(this::peliculaEntity2DTO).collect(Collectors.toList());
+  public List<MovieDTO> movieEntityList2DTOList(Set<Movie> entities) {
+    return entities.stream().map(this::movieEntity2DTO).collect(Collectors.toList());
   }
 
-  public List<MovieBasicDTO> pelicualEntityList2BasicDTOList(List<Movie> entities) {
+  public List<MovieBasicDTO> movieEntityList2BasicDTOList(List<Movie> entities) {
     return entities.stream().map(e ->
             MovieBasicDTO.builder()
                 .image(e.getImage())
@@ -49,7 +49,7 @@ public class MovieMapper {
         .collect(Collectors.toList());
   }
 
-  public void peliculaEntityRefreshValues(Movie entity, MovieDTO movieDTO) {
+  public void movieEntityRefreshValues(Movie entity, MovieDTO movieDTO) {
     entity.setImage(movieDTO.getImage());
     entity.setTitle(movieDTO.getTitle());
     entity.setCreationDate(movieDTO.getCreationDate());
