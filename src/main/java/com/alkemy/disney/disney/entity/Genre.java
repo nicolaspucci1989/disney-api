@@ -12,13 +12,13 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
-public class Genero {
+public class Genre {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String nombre;
+  private String name;
 
-  private String imagen;
+  private String image;
 }

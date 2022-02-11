@@ -1,7 +1,7 @@
 package com.alkemy.disney.disney.controller;
 
-import com.alkemy.disney.disney.dto.GeneroDTO;
-import com.alkemy.disney.disney.service.GeneroService;
+import com.alkemy.disney.disney.dto.GenreDTO;
+import com.alkemy.disney.disney.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,18 +14,18 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/genre")
-public class GeneroController {
+public class GenreController {
 
-  private final GeneroService generoService;
+  private final GenreService genreService;
 
   @Autowired
-  public GeneroController(GeneroService generoService) {
-    this.generoService = generoService;
+  public GenreController(GenreService genreService) {
+    this.genreService = genreService;
   }
 
   @PostMapping
-  public ResponseEntity<GeneroDTO> save(@Valid @RequestBody GeneroDTO genero) {
-    GeneroDTO generoGuardado = generoService.save(genero);
-    return ResponseEntity.status(HttpStatus.CREATED).body(generoGuardado);
+  public ResponseEntity<GenreDTO> save(@Valid @RequestBody GenreDTO genre) {
+    GenreDTO genreSave = genreService.save(genre);
+    return ResponseEntity.status(HttpStatus.CREATED).body(genreSave);
   }
 }

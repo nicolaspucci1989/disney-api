@@ -1,8 +1,8 @@
 package com.alkemy.disney.disney.repository.specifications;
 
-import com.alkemy.disney.disney.dto.PersonajeFilterDTO;
-import com.alkemy.disney.disney.entity.Pelicula;
-import com.alkemy.disney.disney.entity.Personaje;
+import com.alkemy.disney.disney.dto.CharacterFilterDTO;
+import com.alkemy.disney.disney.entity.Movie;
+import com.alkemy.disney.disney.entity.Character;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class PersonajeSpecification {
-  public static Specification<Personaje> getByFilters(PersonajeFilterDTO filterDTO) {
+public class CharacterSpecification {
+  public static Specification<Character> getByFilters(CharacterFilterDTO filterDTO) {
 
     return (root, criteriaQuery, criteriaBuilder) -> {
       List<Predicate> predicates = new ArrayList<>();
@@ -25,20 +25,20 @@ public class PersonajeSpecification {
       if (StringUtils.hasLength(filterDTO.getName())) {
         predicates.add(
             criteriaBuilder.like(
-                criteriaBuilder.lower(root.get("nombre")),
+                criteriaBuilder.lower(root.get("name")),
                 "%" + filterDTO.getName().toLowerCase() + "%"
             )
         );
       }
 
-      if (filterDTO.getEdad() != null) {
+      if (filterDTO.getAge() != null) {
         predicates.add(
-            criteriaBuilder.equal(root.<Integer>get("edad"), filterDTO.getEdad())
+            criteriaBuilder.equal(root.<Integer>get("age"), filterDTO.getAge())
         );
       }
 
       if (!CollectionUtils.isEmpty(filterDTO.getIdMovies())) {
-        Join<Pelicula, Personaje> join = root.join("peliculas", JoinType.INNER);
+        Join<Movie, Character> join = root.join("movies", JoinType.INNER);
         Expression<String> moviesId = join.get("id");
         predicates.add(moviesId.in(filterDTO.getIdMovies()));
       }

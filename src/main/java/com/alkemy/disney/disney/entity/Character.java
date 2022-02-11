@@ -12,25 +12,26 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE personaje SET deleted = true WHERE id=?")
+@Table(name = "character_entity")
+@SQLDelete(sql = "UPDATE character SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class Personaje {
+public class Character {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String imagen;
+  private String image;
 
-  private String nombre;
+  private String name;
 
-  private Integer edad;
+  private Integer age;
 
-  private Float peso;
+  private Float weight;
 
-  private String historia;
+  private String history;
 
-  @ManyToMany(mappedBy = "personajes", cascade = CascadeType.ALL)
-  private Set<Pelicula> peliculas = new HashSet<>();
+  @ManyToMany(mappedBy = "characters", cascade = CascadeType.ALL)
+  private Set<Movie> movies = new HashSet<>();
 
   private boolean deleted = Boolean.FALSE;
 

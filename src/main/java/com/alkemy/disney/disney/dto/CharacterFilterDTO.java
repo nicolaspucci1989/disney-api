@@ -9,8 +9,8 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class PersonajeFilterDTO {
+public class CharacterFilterDTO {
   private String name;
-  private Integer edad;
+  private Integer age;
   private List<Long> idMovies;
 }

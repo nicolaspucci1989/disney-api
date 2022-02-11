@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class PeliculaFilterDTO {
+public class MovieFilterDTO {
   private String name;
   private Long idGenre;
   private String order;

@@ -54,7 +54,7 @@ public class AuthController {
       Authentication auth = authenticationManager.authenticate(authentication);
       userDetails = (UserDetails) auth.getPrincipal();
     } catch (BadCredentialsException e) {
-      throw new Exception("Usuario o password incorrecot", e);
+      throw new Exception("Incorrect username or password", e);
     }
 
     String jwt = jwtUtils.generateToken(userDetails);
