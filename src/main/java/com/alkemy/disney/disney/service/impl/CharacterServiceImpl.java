@@ -51,14 +51,14 @@ public class CharacterServiceImpl implements CharacterService {
   public CharacterDTO getDetailsById(Long id) {
     return this.characterRepository.findById(id)
         .map(this::getPersonajePersonajeDTOFunction)
-        .orElseThrow(() -> new ParamNotFound("no se encontro"));
+        .orElseThrow(() -> new ParamNotFound("Character not found"));
   }
 
   @Override
   public CharacterDTO update(Long id, CharacterDTO characterDTO) {
     Optional<Character> entity = characterRepository.findById(id);
     if (entity.isEmpty()) {
-      throw new ParamNotFound("Id de presonaje no valido");
+      throw new ParamNotFound("Character id is not valid");
     }
     this.characterMapper.characterEntityRefreshValues(entity.get(), characterDTO);
     Character characterSaved = this.characterRepository.save(entity.get());
