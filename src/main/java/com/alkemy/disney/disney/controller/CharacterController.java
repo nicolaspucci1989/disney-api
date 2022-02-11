@@ -28,25 +28,25 @@ public class CharacterController {
       @RequestParam(required = false) Integer age,
       @RequestParam(required = false) List<Long> movies
   ) {
-    List<CharacterBasicDTO> personajes = this.characterService.getAll(name, age, movies);
-    return ResponseEntity.ok(personajes);
+    List<CharacterBasicDTO> characters = this.characterService.getAll(name, age, movies);
+    return ResponseEntity.ok(characters);
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<CharacterDTO> getDetailsById(@PathVariable Long id) {
-    CharacterDTO personaje = characterService.getDetailsById(id);
-    return ResponseEntity.ok(personaje);
+    CharacterDTO character = characterService.getDetailsById(id);
+    return ResponseEntity.ok(character);
   }
 
   @PostMapping
-  public ResponseEntity<CharacterDTO> save(@Valid @RequestBody CharacterDTO personaje) {
-    CharacterDTO personajeGuardado = characterService.save(personaje);
-    return ResponseEntity.status(HttpStatus.CREATED).body(personajeGuardado);
+  public ResponseEntity<CharacterDTO> save(@Valid @RequestBody CharacterDTO character) {
+    CharacterDTO saveCharacter = characterService.save(character);
+    return ResponseEntity.status(HttpStatus.CREATED).body(saveCharacter);
   }
 
   @PutMapping("{id}")
-  public ResponseEntity<CharacterDTO> update(@PathVariable Long id, @Valid @RequestBody CharacterDTO personaje) {
-    CharacterDTO res = this.characterService.update(id, personaje);
+  public ResponseEntity<CharacterDTO> update(@PathVariable Long id, @Valid @RequestBody CharacterDTO character) {
+    CharacterDTO res = this.characterService.update(id, character);
     return ResponseEntity.ok().body(res);
   }
 
