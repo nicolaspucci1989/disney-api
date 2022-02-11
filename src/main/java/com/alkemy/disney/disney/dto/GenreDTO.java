@@ -10,9 +10,9 @@ import javax.validation.constraints.NotBlank;
 public class GenreDTO {
   private Long id;
 
-  @NotBlank(message = "Nombre es requerido")
-  private String nombre;
+  @NotBlank(message = "Name is required")
+  private String name;
 
-  @NotBlank(message = "Imagen es requerido")
-  private String imagen;
+  @NotBlank(message = "Image is required")
+  private String image;
 }
