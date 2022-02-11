@@ -78,7 +78,7 @@ public class CharacterServiceImpl implements CharacterService {
   private CharacterDTO getPersonajePersonajeDTOFunction(Character character) {
     CharacterDTO characterDTO = this.characterMapper.personajeEntity2DTO(character);
     List<MovieDTO> movieDTOS = movieMapper.peliculaEntityList2DTOList(character.getMovies());
-    characterDTO.setPeliculas(movieDTOS);
+    characterDTO.setMovies(movieDTOS);
     return characterDTO;
   }
 
