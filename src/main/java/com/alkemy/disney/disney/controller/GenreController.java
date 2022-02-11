@@ -24,8 +24,8 @@ public class GenreController {
   }
 
   @PostMapping
-  public ResponseEntity<GenreDTO> save(@Valid @RequestBody GenreDTO genero) {
-    GenreDTO generoGuardado = genreService.save(genero);
-    return ResponseEntity.status(HttpStatus.CREATED).body(generoGuardado);
+  public ResponseEntity<GenreDTO> save(@Valid @RequestBody GenreDTO genre) {
+    GenreDTO genreSave = genreService.save(genre);
+    return ResponseEntity.status(HttpStatus.CREATED).body(genreSave);
   }
 }

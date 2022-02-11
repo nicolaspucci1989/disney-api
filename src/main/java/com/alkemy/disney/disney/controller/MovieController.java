@@ -28,8 +28,8 @@ public class MovieController {
       @RequestParam(required = false) Long idGenre,
       @RequestParam(defaultValue = "ASC") String order
   ) {
-    List<MovieBasicDTO> dtos = movieService.getAll(name, idGenre, order);
-    return ResponseEntity.ok(dtos);
+    List<MovieBasicDTO> DTOs = movieService.getAll(name, idGenre, order);
+    return ResponseEntity.ok(DTOs);
   }
 
   @GetMapping("{id}")
@@ -39,14 +39,14 @@ public class MovieController {
   }
 
   @PostMapping
-  public ResponseEntity<MovieDTO> save(@Valid @RequestBody MovieDTO pelicula) {
-    MovieDTO peliculaGuardada = movieService.save(pelicula);
-    return ResponseEntity.status(HttpStatus.CREATED).body(peliculaGuardada);
+  public ResponseEntity<MovieDTO> save(@Valid @RequestBody MovieDTO movie) {
+    MovieDTO movieSave = movieService.save(movie);
+    return ResponseEntity.status(HttpStatus.CREATED).body(movieSave);
   }
 
   @PutMapping("{id}")
-  public ResponseEntity<MovieDTO> update(@PathVariable Long id, @Valid @RequestBody MovieDTO pelicula) {
-    MovieDTO res = this.movieService.update(id, pelicula);
+  public ResponseEntity<MovieDTO> update(@PathVariable Long id, @Valid @RequestBody MovieDTO movie) {
+    MovieDTO res = this.movieService.update(id, movie);
     return ResponseEntity.ok().body(res);
   }
 
@@ -56,15 +56,15 @@ public class MovieController {
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
-  @PostMapping("{id}/character/{idPersonaje}")
-  public ResponseEntity<Void> addPersonaje(@PathVariable Long id, @PathVariable Long idPersonaje) {
-    this.movieService.addCharacter(id, idPersonaje);
+  @PostMapping("{id}/character/{idCharacter}")
+  public ResponseEntity<Void> addCharacter(@PathVariable Long id, @PathVariable Long idCharacter) {
+    this.movieService.addCharacter(id, idCharacter);
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  @DeleteMapping("{id}/character/{idPersonaje}")
-  public ResponseEntity<Void> removePersonaje(@PathVariable Long id, @PathVariable Long idPersonaje) {
-    this.movieService.removeCharacter(id, idPersonaje);
+  @DeleteMapping("{id}/character/{idCharacter}")
+  public ResponseEntity<Void> removeCharacter(@PathVariable Long id, @PathVariable Long idCharacter) {
+    this.movieService.removeCharacter(id, idCharacter);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
