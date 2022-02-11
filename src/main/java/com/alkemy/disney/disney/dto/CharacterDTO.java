@@ -24,8 +24,8 @@ public class CharacterDTO {
   @NotNull(message = "Peso es requerido")
   private Float peso;
 
-  @NotBlank(message = "Historia es requerido")
-  private String historia;
+  @NotBlank(message = "History is required")
+  private String history;
 
   private List<MovieDTO> peliculas;
 }

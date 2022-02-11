@@ -28,7 +28,7 @@ public class Character {
 
   private Float peso;
 
-  private String historia;
+  private String history;
 
   @ManyToMany(mappedBy = "characters", cascade = CascadeType.ALL)
   private Set<Movie> movies = new HashSet<>();
