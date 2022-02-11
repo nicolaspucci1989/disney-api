@@ -55,12 +55,12 @@ public class CharacterServiceImpl implements CharacterService {
   }
 
   @Override
-  public CharacterDTO update(Long id, CharacterDTO characterDTO) {
+  public CharacterDTO update(Long id, CharacterDTO character) {
     Optional<Character> entity = characterRepository.findById(id);
     if (entity.isEmpty()) {
       throw new ParamNotFound("Character id is not valid");
     }
-    this.characterMapper.characterEntityRefreshValues(entity.get(), characterDTO);
+    this.characterMapper.characterEntityRefreshValues(entity.get(), character);
     Character characterSaved = this.characterRepository.save(entity.get());
     return characterMapper.characterEntity2DTO(characterSaved);
   }

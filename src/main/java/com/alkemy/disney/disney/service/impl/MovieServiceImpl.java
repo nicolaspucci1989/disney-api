@@ -83,12 +83,12 @@ public class MovieServiceImpl implements MovieService {
   }
 
   @Override
-  public MovieDTO update(Long id, MovieDTO movieDTO) {
+  public MovieDTO update(Long id, MovieDTO movie) {
     Optional<Movie> entity = movieRepository.findById(id);
     if (entity.isEmpty()) {
       throw new ParamNotFound("Character id not valid");
     }
-    this.movieMapper.movieEntityRefreshValues(entity.get(), movieDTO);
+    this.movieMapper.movieEntityRefreshValues(entity.get(), movie);
     Movie movieSaved = this.movieRepository.save(entity.get());
     return movieMapper.movieEntity2DTO(movieSaved);
   }

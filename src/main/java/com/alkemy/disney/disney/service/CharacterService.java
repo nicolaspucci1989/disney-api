@@ -13,9 +13,9 @@ public interface CharacterService {
 
   CharacterDTO getDetailsById(Long id);
 
-  CharacterDTO update(Long id, CharacterDTO personaje);
+  CharacterDTO update(Long id, CharacterDTO character);
 
   void delete(Long id);
 
-  Character getById(Long idPersonaje);
+  Character getById(Long idCharacter);
 }
