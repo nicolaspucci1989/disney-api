@@ -70,7 +70,7 @@ public class MovieServiceImpl implements MovieService {
   public void addPersonaje(Long id, Long idPersonaje) {
     Movie entity = movieRepository.getById(id);
     Character character = characterService.getById(idPersonaje);
-    entity.addPersonaje(character);
+    entity.addCharacter(character);
     movieRepository.save(entity);
   }
 
@@ -78,7 +78,7 @@ public class MovieServiceImpl implements MovieService {
   public void removePersonaje(Long id, Long idPersonaje) {
     Movie entity = movieRepository.getById(id);
     Character character = characterService.getById(idPersonaje);
-    entity.removePersonaje(character);
+    entity.removeCharacter(character);
     movieRepository.save(entity);
   }
 

@@ -52,11 +52,11 @@ public class Movie {
 
   private boolean deleted = Boolean.FALSE;
 
-  public void addPersonaje(Character character) {
+  public void addCharacter(Character character) {
     characters.add(character);
   }
 
-  public void removePersonaje(Character character) {
+  public void removeCharacter(Character character) {
     characters.remove(character);
   }
 }
