@@ -50,7 +50,7 @@ public class CharacterServiceImpl implements CharacterService {
   @Override
   public CharacterDTO getDetailsById(Long id) {
     return this.characterRepository.findById(id)
-        .map(this::getPersonajePersonajeDTOFunction)
+        .map(this::getCharacterDetailDTO)
         .orElseThrow(() -> new ParamNotFound("Character not found"));
   }
 
@@ -75,7 +75,7 @@ public class CharacterServiceImpl implements CharacterService {
     return this.characterRepository.getById(idCharacter);
   }
 
-  private CharacterDTO getPersonajePersonajeDTOFunction(Character character) {
+  private CharacterDTO getCharacterDetailDTO(Character character) {
     CharacterDTO characterDTO = this.characterMapper.characterEntity2DTO(character);
     List<MovieDTO> movieDTOS = movieMapper.movieEntityList2DTOList(character.getMovies());
     characterDTO.setMovies(movieDTOS);
