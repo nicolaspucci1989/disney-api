@@ -58,7 +58,7 @@ public class MovieServiceImpl implements MovieService {
   public MovieDTO getDetailsById(Long id) {
     return this.movieRepository.findById(id)
         .map(this::getPeliculaDetailsDTO)
-        .orElseThrow(() -> new ParamNotFound("Id de pelicula no valido"));
+        .orElseThrow(() -> new ParamNotFound("Character id not valid"));
   }
 
   @Override
@@ -86,7 +86,7 @@ public class MovieServiceImpl implements MovieService {
   public MovieDTO update(Long id, MovieDTO movieDTO) {
     Optional<Movie> entity = movieRepository.findById(id);
     if (entity.isEmpty()) {
-      throw new ParamNotFound("Id de presonaje no valido");
+      throw new ParamNotFound("Character id not valid");
     }
     this.movieMapper.movieEntityRefreshValues(entity.get(), movieDTO);
     Movie movieSaved = this.movieRepository.save(entity.get());
