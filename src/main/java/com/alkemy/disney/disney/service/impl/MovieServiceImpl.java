@@ -40,7 +40,7 @@ public class MovieServiceImpl implements MovieService {
   @Override
   public MovieDTO save(MovieDTO dto) {
     Movie movie = movieMapper.peliculaDTO2Entity(dto);
-    Set<Character> characters = characterMapper.personajeDTOList2Entity(dto.getPersonajes());
+    Set<Character> characters = characterMapper.personajeDTOList2Entity(dto.getCharacters());
     movie.setCharacters(characters);
     Movie entitySave = this.movieRepository.save(movie);
     return getPeliculaDetailsDTO(entitySave);
@@ -96,7 +96,7 @@ public class MovieServiceImpl implements MovieService {
   private MovieDTO getPeliculaDetailsDTO(Movie movie) {
     MovieDTO movieDTO = this.movieMapper.peliculaEntity2DTO(movie);
     List<CharacterDTO> characterDTOS = this.characterMapper.personajeEntitySet2DTOList(movie.getCharacters());
-    movieDTO.setPersonajes(characterDTOS);
+    movieDTO.setCharacters(characterDTOS);
     return movieDTO;
   }
 }
