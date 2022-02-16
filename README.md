@@ -1,4 +1,4 @@
-[[!ci Actions Status](https://github.com/nicolaspucci1989/disney-api/workflows/ci/badge.svg)](https://github.com/nicolaspucci1989/disney-api/actions)
+[![CI Actions Status](https://github.com/nicolaspucci1989/disney-api/workflows/ci/badge.svg)](https://github.com/nicolaspucci1989/disney-api/actions)
 
 # disney-api
 Challenge preaceleración alkemy
