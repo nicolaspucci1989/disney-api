@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @DisplayName("Smoke test")
 @SpringBootTest
-class DisneyApplicationTests {
+class SmokeTest {
 
   @Test
   @DisplayName("should pass")
