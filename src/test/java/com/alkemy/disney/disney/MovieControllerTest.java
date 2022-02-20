@@ -1,10 +1,6 @@
 package com.alkemy.disney.disney;
 
 import com.alkemy.disney.disney.dto.MovieDTO;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +15,7 @@ import javax.transaction.Transactional;
 
 import java.time.LocalDate;
 
+import static com.alkemy.disney.disney.TestHelper.getMapper;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -48,13 +45,5 @@ public class MovieControllerTest {
             .content(getMapper().writeValueAsString(movieDTO))
     )
         .andExpect(status().isBadRequest());
-  }
-
-  private static ObjectMapper getMapper() {
-    var mapper = new ObjectMapper();
-    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-    mapper.registerModule(new JavaTimeModule());
-    return mapper;
   }
 }
