@@ -1,6 +1,9 @@
 package com.alkemy.disney.disney;
 
+import com.alkemy.disney.disney.dto.GenreDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
+import com.alkemy.disney.disney.entity.Genre;
+import com.alkemy.disney.disney.service.GenreService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import javax.transaction.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static com.alkemy.disney.disney.TestHelper.getMapper;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -28,6 +32,8 @@ public class MovieControllerTest {
 
   @Autowired
   MockMvc mockMvc;
+  @Autowired
+  GenreService genreService;
 
   @Transactional
   @Test
@@ -45,5 +51,27 @@ public class MovieControllerTest {
             .content(getMapper().writeValueAsString(movieDTO))
     )
         .andExpect(status().isBadRequest());
+  }
+
+  @Transactional
+  @Test
+  @DisplayName("should return 201 when creating a valid movie")
+  public void createValidMovie() throws Exception {
+
+    MovieDTO movieDTO = MovieDTO.builder()
+        .image("/img/image.jpg")
+        .title("Movie Title")
+        .creationDate(LocalDate.of(2000,1,1))
+        .genreId(1L)
+        .rating(3)
+        .characters(new ArrayList<>())
+        .build();
+
+    mockMvc.perform(
+            post("/movies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(getMapper().writeValueAsString(movieDTO))
+        )
+        .andExpect(status().isCreated());
   }
 }
