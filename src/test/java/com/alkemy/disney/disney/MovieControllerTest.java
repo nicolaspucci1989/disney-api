@@ -1,7 +1,11 @@
 package com.alkemy.disney.disney;
 
+import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
-import com.alkemy.disney.disney.service.GenreService;
+import com.alkemy.disney.disney.service.CharacterService;
+import com.alkemy.disney.disney.service.MovieService;
+import org.hamcrest.core.Is;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,8 @@ import java.util.ArrayList;
 
 import static com.alkemy.disney.disney.TestHelper.getMapper;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -30,7 +36,30 @@ public class MovieControllerTest {
   @Autowired
   MockMvc mockMvc;
   @Autowired
-  GenreService genreService;
+  MovieService movieService;
+  @Autowired
+  CharacterService characterService;
+
+  @BeforeEach
+  public void setup() {
+    MovieDTO movieDTOOne = getMovieDTO();
+    MovieDTO movieDTOTwo = getMovieDTO();
+
+    CharacterDTO characterDTOOne = getCharacterDTO();
+    CharacterDTO characterDTOTwo = getCharacterDTO();
+
+    movieDTOOne.setTitle("Movie One");
+    movieDTOTwo.setTitle("Movie One");
+
+    characterDTOOne.setName("Character One");
+    characterDTOTwo.setName("Character Two");
+
+    movieService.save(movieDTOOne);
+    movieService.save(movieDTOTwo);
+
+    characterService.save(characterDTOOne);
+    characterService.save(characterDTOTwo);
+  }
 
   @Transactional
   @Test
@@ -72,5 +101,44 @@ public class MovieControllerTest {
                 .content(getMapper().writeValueAsString(movieDTO))
         )
         .andExpect(status().isCreated());
+  }
+
+  @Transactional
+  @Test
+  @DisplayName("should return 200 when updating a movie")
+  public void updateMovie() throws Exception {
+    MovieDTO movieDTO = getMovieDTO();
+    String title = "Updated movie title";
+    movieDTO.setTitle(title);
+
+    mockMvc.perform(
+        put("/movies/1")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(getMapper().writeValueAsString(movieDTO))
+    )
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.title", Is.is(title)));
+  }
+
+  private MovieDTO getMovieDTO() {
+    return MovieDTO.builder()
+        .characters(new ArrayList<>())
+        .title("Title")
+        .genreId(1L)
+        .creationDate(LocalDate.of(2000, 1, 1))
+        .image("/img/movie.jpg")
+        .rating(5)
+        .build();
+  }
+
+  private CharacterDTO getCharacterDTO() {
+    return CharacterDTO.builder()
+        .image("/img/character.jpg")
+        .name("Character")
+        .age(30)
+        .weight(90f)
+        .history("History")
+        .movies(new ArrayList<>())
+        .build();
   }
 }
