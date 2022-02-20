@@ -34,7 +34,7 @@ public class MovieControllerTest {
 
   @Transactional
   @Test
-  @DisplayName("should return 400 when creating a invalid movie")
+  @DisplayName("should return 400 when creating an invalid movie")
   public void createInvalidMovie() throws Exception {
     MovieDTO movieDTO = MovieDTO.builder()
         .image("/img/image.jpg")
