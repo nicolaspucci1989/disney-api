@@ -1,7 +1,6 @@
 package com.alkemy.disney.disney;
 
 import com.alkemy.disney.disney.dto.CharacterDTO;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +38,12 @@ public class CharacterControllerTest {
         .name("Name")
         .build();
 
-        mockMvc.perform(
+    mockMvc.perform(
             post("/characters")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(getMapper().writeValueAsString(characterDTO))
         )
-            .andExpect(status().isBadRequest());
+        .andExpect(status().isBadRequest());
   }
 
   @Transactional
@@ -60,10 +59,10 @@ public class CharacterControllerTest {
         .build();
 
     mockMvc.perform(
-        post("/characters")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(getMapper().writeValueAsString(characterDTO))
-    )
+            post("/characters")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(getMapper().writeValueAsString(characterDTO))
+        )
         .andExpect(status().isCreated());
   }
 }

@@ -1,8 +1,6 @@
 package com.alkemy.disney.disney;
 
-import com.alkemy.disney.disney.dto.GenreDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
-import com.alkemy.disney.disney.entity.Genre;
 import com.alkemy.disney.disney.service.GenreService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +13,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -41,17 +38,17 @@ public class MovieControllerTest {
   public void createInvalidMovie() throws Exception {
     MovieDTO movieDTO = MovieDTO.builder()
         .image("/img/image.jpg")
-        .creationDate(LocalDate.of(2000,1,1))
+        .creationDate(LocalDate.of(2000, 1, 1))
         .rating(3)
         .characters(new ArrayList<>())
         .genreId(1L)
         .build();
 
     mockMvc.perform(
-        post("/movies")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(getMapper().writeValueAsString(movieDTO))
-    )
+            post("/movies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(getMapper().writeValueAsString(movieDTO))
+        )
         .andExpect(status().isBadRequest());
   }
 
@@ -63,7 +60,7 @@ public class MovieControllerTest {
     MovieDTO movieDTO = MovieDTO.builder()
         .image("/img/image.jpg")
         .title("Movie Title")
-        .creationDate(LocalDate.of(2000,1,1))
+        .creationDate(LocalDate.of(2000, 1, 1))
         .genreId(1L)
         .rating(3)
         .characters(new ArrayList<>())
