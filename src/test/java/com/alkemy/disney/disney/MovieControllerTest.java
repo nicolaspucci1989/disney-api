@@ -43,6 +43,8 @@ public class MovieControllerTest {
         .image("/img/image.jpg")
         .creationDate(LocalDate.of(2000,1,1))
         .rating(3)
+        .characters(new ArrayList<>())
+        .genreId(1L)
         .build();
 
     mockMvc.perform(
