@@ -1,6 +1,7 @@
 package com.alkemy.disney.disney;
 
 import com.alkemy.disney.disney.dto.CharacterDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,25 @@ public class CharacterControllerTest {
                 .content(getMapper().writeValueAsString(characterDTO))
         )
             .andExpect(status().isBadRequest());
+  }
+
+  @Transactional
+  @Test
+  @DisplayName("should return 201 when creating a valid character")
+  public void createValidCharacter() throws Exception {
+    CharacterDTO characterDTO = CharacterDTO.builder()
+        .image("/img/character.jpg")
+        .name("Character Name")
+        .age(30)
+        .weight(90f)
+        .history("Some history")
+        .build();
+
+    mockMvc.perform(
+        post("/characters")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(getMapper().writeValueAsString(characterDTO))
+    )
+        .andExpect(status().isCreated());
   }
 }
