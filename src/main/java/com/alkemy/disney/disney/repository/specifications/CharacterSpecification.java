@@ -1,9 +1,9 @@
 package com.alkemy.disney.disney.repository.specifications;
 
 import com.alkemy.disney.disney.dto.CharacterFilterDTO;
+import com.alkemy.disney.disney.entity.Character;
 import com.alkemy.disney.disney.entity.Character_;
 import com.alkemy.disney.disney.entity.Movie;
-import com.alkemy.disney.disney.entity.Character;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
