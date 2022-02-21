@@ -1,8 +1,10 @@
 package com.alkemy.disney.disney;
 
 import com.alkemy.disney.disney.dto.CharacterDTO;
+import com.alkemy.disney.disney.dto.GenreDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.service.CharacterService;
+import com.alkemy.disney.disney.service.GenreService;
 import com.alkemy.disney.disney.service.MovieService;
 import org.hamcrest.core.Is;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,8 +23,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static com.alkemy.disney.disney.TestHelper.getMapper;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -39,6 +40,8 @@ public class MovieControllerTest {
   MovieService movieService;
   @Autowired
   CharacterService characterService;
+  @Autowired
+  GenreService genreService;
 
   @BeforeEach
   public void setup() {
@@ -54,6 +57,11 @@ public class MovieControllerTest {
     characterDTOOne.setName("Character One");
     characterDTOTwo.setName("Character Two");
 
+    GenreDTO genreDTO = new GenreDTO();
+    genreDTO.setName("Genre");
+    genreDTO.setImage("/img/genre.jpg");
+    genreService.save(genreDTO);
+
     movieService.save(movieDTOOne);
     movieService.save(movieDTOTwo);
 
@@ -61,7 +69,6 @@ public class MovieControllerTest {
     characterService.save(characterDTOTwo);
   }
 
-  @Transactional
   @Test
   @DisplayName("should return 400 when creating an invalid movie")
   public void createInvalidMovie() throws Exception {
@@ -112,10 +119,16 @@ public class MovieControllerTest {
     movieDTO.setTitle(title);
 
     mockMvc.perform(
-        put("/movies/1")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(getMapper().writeValueAsString(movieDTO))
-    )
+            get("/movies/1")
+        )
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.title", Is.is("Movie One")));
+
+    mockMvc.perform(
+            put("/movies/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(getMapper().writeValueAsString(movieDTO))
+        )
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.title", Is.is(title)));
   }
