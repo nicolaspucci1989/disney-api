@@ -3,6 +3,7 @@ package com.alkemy.disney.disney;
 import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.dto.GenreDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
+import com.alkemy.disney.disney.entity.Genre;
 import com.alkemy.disney.disney.service.CharacterService;
 import com.alkemy.disney.disney.service.GenreService;
 import com.alkemy.disney.disney.service.MovieService;
@@ -39,46 +40,14 @@ public class MovieControllerTest {
   @Autowired
   MovieService movieService;
   @Autowired
-  CharacterService characterService;
-  @Autowired
   GenreService genreService;
 
-  @BeforeEach
-  public void setup() {
-    MovieDTO movieDTOOne = getMovieDTO();
-    MovieDTO movieDTOTwo = getMovieDTO();
-
-    CharacterDTO characterDTOOne = getCharacterDTO();
-    CharacterDTO characterDTOTwo = getCharacterDTO();
-
-    movieDTOOne.setTitle("Movie One");
-    movieDTOTwo.setTitle("Movie One");
-
-    characterDTOOne.setName("Character One");
-    characterDTOTwo.setName("Character Two");
-
-    GenreDTO genreDTO = new GenreDTO();
-    genreDTO.setName("Genre");
-    genreDTO.setImage("/img/genre.jpg");
-    genreService.save(genreDTO);
-
-    movieService.save(movieDTOOne);
-    movieService.save(movieDTOTwo);
-
-    characterService.save(characterDTOOne);
-    characterService.save(characterDTOTwo);
-  }
-
+  @Transactional
   @Test
   @DisplayName("should return 400 when creating an invalid movie")
   public void createInvalidMovie() throws Exception {
-    MovieDTO movieDTO = MovieDTO.builder()
-        .image("/img/image.jpg")
-        .creationDate(LocalDate.of(2000, 1, 1))
-        .rating(3)
-        .characters(new ArrayList<>())
-        .genreId(1L)
-        .build();
+    MovieDTO movieDTO = getMovieDTO();
+    movieDTO.setTitle("");
 
     mockMvc.perform(
             post("/movies")
@@ -92,15 +61,13 @@ public class MovieControllerTest {
   @Test
   @DisplayName("should return 201 when creating a valid movie")
   public void createValidMovie() throws Exception {
+    GenreDTO genreDTO = new GenreDTO();
+    genreDTO.setImage("/img/fiction.jpg");
+    genreDTO.setName("Fiction");
+    GenreDTO saveGenreDTO = genreService.save(genreDTO);
 
-    MovieDTO movieDTO = MovieDTO.builder()
-        .image("/img/image.jpg")
-        .title("Movie Title")
-        .creationDate(LocalDate.of(2000, 1, 1))
-        .genreId(1L)
-        .rating(3)
-        .characters(new ArrayList<>())
-        .build();
+    MovieDTO movieDTO = getMovieDTO();
+    movieDTO.setGenreId(saveGenreDTO.getId());
 
     mockMvc.perform(
             post("/movies")
@@ -114,15 +81,24 @@ public class MovieControllerTest {
   @Test
   @DisplayName("should return 200 when updating a movie")
   public void updateMovie() throws Exception {
+    GenreDTO genreDTO = new GenreDTO();
+    genreDTO.setImage("/img/fiction.jpg");
+    genreDTO.setName("Fiction");
+    genreService.save(genreDTO);
     MovieDTO movieDTO = getMovieDTO();
-    String title = "Updated movie title";
-    movieDTO.setTitle(title);
+    String originalTitle = "Original movie title";
+    movieDTO.setTitle(originalTitle);
+    movieDTO.setGenreId(1L);
+    movieService.save(movieDTO);
 
     mockMvc.perform(
             get("/movies/1")
         )
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.title", Is.is("Movie One")));
+        .andExpect(jsonPath("$.title", Is.is(originalTitle)));
+
+    String title = "Updated movie title";
+    movieDTO.setTitle(title);
 
     mockMvc.perform(
             put("/movies/1")
