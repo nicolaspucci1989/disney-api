@@ -22,8 +22,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static com.alkemy.disney.disney.TestHelper.getMapper;
-import static com.alkemy.disney.disney.TestHelper.getMovieDTO;
+import static com.alkemy.disney.disney.TestHelper.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -132,16 +131,5 @@ public class MovieControllerTest {
         )
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.title", Is.is(title)));
-  }
-
-  private CharacterDTO getCharacterDTO() {
-    return CharacterDTO.builder()
-        .image("/img/character.jpg")
-        .name("Character")
-        .age(30)
-        .weight(90f)
-        .history("History")
-        .movies(new ArrayList<>())
-        .build();
   }
 }

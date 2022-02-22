@@ -1,5 +1,6 @@
 package com.alkemy.disney.disney;
 
+import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +19,17 @@ public class TestHelper {
         .creationDate(LocalDate.of(2000, 1, 1))
         .image("/img/movie.jpg")
         .rating(5)
+        .build();
+  }
+
+  public static CharacterDTO getCharacterDTO() {
+    return CharacterDTO.builder()
+        .image("/img/character.jpg")
+        .name("Character")
+        .age(30)
+        .weight(90f)
+        .history("History")
+        .movies(new ArrayList<>())
         .build();
   }
 
