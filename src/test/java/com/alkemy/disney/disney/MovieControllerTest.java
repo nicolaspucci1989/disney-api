@@ -1,14 +1,10 @@
 package com.alkemy.disney.disney;
 
-import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.dto.GenreDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
-import com.alkemy.disney.disney.entity.Genre;
-import com.alkemy.disney.disney.service.CharacterService;
 import com.alkemy.disney.disney.service.GenreService;
 import com.alkemy.disney.disney.service.MovieService;
 import org.hamcrest.core.Is;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +16,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
-import static com.alkemy.disney.disney.TestHelper.*;
+import static com.alkemy.disney.disney.TestHelper.getMapper;
+import static com.alkemy.disney.disney.TestHelper.getMovieDTO;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
